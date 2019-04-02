@@ -1,0 +1,149 @@
+<!--Double navigation-->
+<header>
+    <!-- Sidebar navigation -->
+    <mdb-sidenav #sidenav class="sn-bg-1" [fixed]="false">
+        <li>
+            <div class="logo-wrapper waves-light">
+                <a [routerLink]="['/home']"><img src="assets/img/logo.png" class="img-fluid flex-center"></a>
+            </div>
+        </li>
+        <li>
+            <ul class="collapsible collapsible-accordion">
+                <mdb-squeezebox [multiple]="false" aria-multiselectable="false">
+                    <!-- Simple link -->
+                    <mdb-item class="no-collase">
+                        <mdb-item-head mdbRippleRadius [routerLink]="['/home']">Home</mdb-item-head>
+                        <mdb-item-body></mdb-item-body>
+                    </mdb-item>
+                    <mdb-item class="no-collase">
+                        <mdb-item-head mdbRippleRadius [routerLink]="['/products']">Products</mdb-item-head>
+                        <mdb-item-body></mdb-item-body>
+                    </mdb-item>
+                    <mdb-item class="no-collase">
+                        <mdb-item-head mdbRippleRadius [routerLink]="['/menu']">Menu</mdb-item-head>
+                        <mdb-item-body></mdb-item-body>
+                    </mdb-item>
+
+                    <!-- Collapsible link -->
+                    <mdb-item>
+                        <mdb-item-head mdbRippleRadius>Account</mdb-item-head>
+                        <mdb-item-body>
+                            <ul>
+                                <li><a class="waves-effect" mdbRippleRadius *ngIf="!check()" [routerLink]="['/login']">Login</a></li>
+                                <li><a class="waves-effect" mdbRippleRadius *ngIf="!check()" [routerLink]="['/signup']">Create
+                                        Account</a></li>
+                                <li><a class="waves-effect" mdbRippleRadius *ngIf="check()" [routerLink]="['/order-history']">Orders</a></li>
+                                <li><a class="waves-effect" mdbRippleRadius *ngIf="check()" [routerLink]="['/booked-table']">Booked
+                                        Table</a></li>
+                                <li><a class="waves-effect" mdbRippleRadius *ngIf="check()" [routerLink]="['/account']">Account
+                                        Details</a></li>
+                                <li><a class="waves-effect" mdbRippleRadius *ngIf="check()" (click)="logout()">Logout</a></li>
+                            </ul>
+                        </mdb-item-body>
+                    </mdb-item>
+
+                </mdb-squeezebox>
+            </ul>
+        </li>
+        <!--/. Side navigation links -->
+    </mdb-sidenav>
+    <!--/. Sidebar navigation -->
+
+
+    <!-- Navbar -->
+    <mdb-navbar SideClass="navbar navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav" [containerInside]="false">
+        <navlinks class="navbar-container">
+            <!-- SideNav slide-out button -->
+            <div class="float-left">
+                <a (click)="sidenav.show()" class="button-collapse-non-fixed hidden-nav"><i class="fa fa-bars"></i></a>
+            </div>
+            <!--/. SideNav slide-out button -->
+        </navlinks>
+
+        <logo class="hidden-md-down">
+            <img src="assets/img/logo.png" class="logo-img" [routerLink]="['/home']">
+        </logo>
+
+        <navlinks>
+            <ul class="nav navbar-nav nav-flex-icons ie-double-nav hidden-md-down">
+                <li class="nav-item  btn-group">
+                    <a dropdownToggle ripple-radius type="button" class="nav-link" [routerLink]="['/home']">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item  btn-group">
+                    <a ripple-radius type="button" class="nav-link" [routerLink]="['/products']">
+                        Products
+                    </a>
+                </li>
+
+                <li class="nav-item  btn-group" dropdown>
+                    <a dropdownToggle ripple-radius type="button" class="nav-link" [routerLink]="['/menu']">
+                        Menu List
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">
+                <li class="nav-item dropdown  btn-group" dropdown>
+                    <a dropdownToggle ripple-radius type="button" class="nav-link dropdown-toggle">
+                        <i class="fa fa-user"></i>
+                        <span class="hidden-md-down">Account</span>
+                    </a>
+                    <div class="dropdown-menu account dropdown-menu-right" role="menu">
+                        <a class="dropdown-item" *ngIf="!check()" [routerLink]="['/login']">Login</a>
+                        <a class="dropdown-item" *ngIf="!check()" [routerLink]="['/signup']">Create Account</a>
+                        <a class="dropdown-item" *ngIf="check()" [routerLink]="['/wishlist']">Wishlist</a>
+                        <a class="dropdown-item" *ngIf="check()" [routerLink]="['/order-history']">Orders</a>
+                        <a class="dropdown-item" *ngIf="check()" [routerLink]="['/booked-table']">Booked Table</a>
+                        <a class="dropdown-item" *ngIf="check()" [routerLink]="['/account']">Account Details</a>
+                        <a class="dropdown-item" *ngIf="check()" (click)="logout()">Logout</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown btn-group" dropdown>
+                    <a dropdownToggle ripple-radius type="button" class="nav-link dropdown-toggle cart-link">
+                        <img src="assets/img/icon/shop-icon.png">
+                        <span class="count" *ngIf="checkCart()">{{cart.length|number}}</span>
+                    </a>
+                    <div class="dropdown-menu cart" aria-labelledby="navbarDropdownMenuLink" *ngIf="cart.length > 0">
+                        <div class="cart-list">
+                            <!-- cart-list-item -->
+                            <div class="row cart-list-item p-2" *ngFor="let item of cart; let i = index;">
+                                <!-- image -->
+                                <div class="col col-sm-3 text-center">
+                                    <img src="{{item.item.thumb}}" class="item-img" [routerLink]="['/cart']">
+                                </div>
+                                <!-- item -->
+                                <div class="col col-sm-9 content">
+                                    <div class="item-name" (click)="viewItem(item._id)">{{item.item.title}}</div>
+                                    <div class="quantity">Qty:<span>{{item.item.itemQunatity}}</span></div>
+                                    <div class="price">Total:<span>{{currency}}{{item.itemTotalPrice|number}}</span></div>
+                                </div>
+                                <!-- cancel-btn -->
+                                <button class="btn-flat waves-effect" data-toggle="tooltip" data-placement="top" title="Remove" (click)="OnDelete(i)">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+
+                            </div> <!-- cart-list-item -->
+                        </div> <!-- cart-list-end -->
+                        <!-- footer button -->
+                        <div class="row footer-btn">
+                            <div class="col col-sm-6">
+                                <a class="btn btn-flat" [routerLink]="['/cart']"><i class="fa fa-shopping-cart left"></i>
+                                    View Cart</a>
+                            </div>
+                            <div class="col col-sm-6 text-right">
+                                <a class="btn btn-flat" (click)="gotoCheckout()"><i class="fa fa-shopping-bag left"></i>
+                                    Checkout</a>
+
+                            </div>
+                        </div> <!-- footer-btn row -->
+                    </div><!--  dropdown menu -->
+                </li>
+            </ul>
+        </navlinks>
+    </mdb-navbar>
+    <!--/. Navbar -->
+</header>
+<!--/.Double navigation-->

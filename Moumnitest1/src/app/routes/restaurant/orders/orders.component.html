@@ -1,0 +1,88 @@
+<div class="content-heading">Orders
+  <small>
+    <a [routerLink]=" ['/home'] ">Tableau de bord</a> -> Oders</small>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">Orders Details</div>
+  <div class="table-responsive b0">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="text-center">
+            <strong>#</strong>
+          </th>
+          <th class="text-center">
+            <strong>Order Id</strong>
+          </th>
+          <th class="text-center">
+            <strong>Nom</strong>
+          </th>
+          <th class="text-center">
+            <strong>Email</strong>
+          </th>
+          <th class="text-center">
+            <strong>Numéro Tel</strong>
+          </th>
+          <th class="text-center">
+            <strong>status</strong>
+          </th>
+        
+          <th class="text-center">
+            <strong>Total</strong>
+          </th>
+          <th class="text-center">
+            <strong>ACTION</strong>
+          </th>
+          <th class="text-center">
+            <strong>View</strong>
+          </th>
+
+          <th class="text-center">
+            <strong> Method De Livraison</strong>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-center" *ngFor="let order of orders;let i = index ">
+          <td>{{i+1}}</td>
+          <td>{{order.orderId}}</td>
+          <td>{{order.userDetails.name}}</td>
+          <td>{{order.userDetails.email}}</td>
+          <td>{{order.userDetails.mobileNo}}</td>
+          <td class="text-center">
+            <span class="label label-success" *ngIf="order.status=='Delivered'">{{order.status}}
+            </span>
+            <span class="label label-warning" *ngIf="order.status =='pending'">{{order.status}}</span>
+            <span class="label label-purple" *ngIf="order.status=='On the Way'">{{order.status}}
+            </span>
+            <span class="label label-danger" *ngIf="order.status=='Canceled'">{{order.status}}</span>
+          </td>
+          <td>{{currency.currencySymbol}}{{order.grandTotal |number}}</td>
+          <td class="text-center">
+            <select class="input-sm form-control" (change)="OnChangeStatus(order.key,$event,order.userId)" [disabled]="order.status=='Delivered'">
+              <option>Select Status</option>
+              <option value="pending">en attente</option>
+              <option value="On the Way">En route </option>
+              <option value="Canceled">Annuler</option>
+              <option value="Delivered">Livrée</option>
+            </select>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-default" type="button" (click)="ordersShow(order.key)">
+              <em class="fa fa-search"></em>
+            </button>
+          </td>
+
+          
+          <td  >COD</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel-footer">
+    <div class="row">
+
+    </div>
+  </div>
+</div>

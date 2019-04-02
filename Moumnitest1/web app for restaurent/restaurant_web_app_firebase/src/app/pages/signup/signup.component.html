@@ -1,0 +1,67 @@
+<section class="form-wrapper">
+  <img src="assets/img/login.png" class="bg-img">
+  <div class="bg-overlay"></div>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="form-content">
+      <img src="assets/img/logo.png">
+      <p class="title">welcome to restraurant app</p>
+
+      <div class="form-group">
+        <label for="username">User name</label>
+        <input type="text" class="form-control" formControlName="name" name="username" id="username" required>
+        <div class="error-msg" *ngIf="signupForm.controls['name'].hasError('required') && signupForm.controls['name'].touched">
+          Please Enter Name
+        </div>
+        <div class="error-msg" *ngIf="signupForm.controls['name'].hasError('minlength') && signupForm.controls['name'].touched">
+          Name can not less then 3 characters
+        </div>
+        <div class="error-msg" *ngIf="signupForm.controls['name'].hasError('maxlength') && signupForm.controls['name'].touched">
+          Name can not exceed 50 characters
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" formControlName="email" name="email" id="email">
+        <div class="error-msg" *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].touched">
+          Please Enter Email
+        </div>
+        <div class="error-msg" *ngIf="signupForm.controls['email'].hasError('pattern') && signupForm.controls['email'].touched">
+          Please Enter a valid Email
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" formControlName="password" name="password" id="password">
+        <div class="error-msg" *ngIf="signupForm.controls['password'].hasError('required') && signupForm.controls['password'].touched">
+          Please Enter password
+        </div>
+        <div class="error-msg" *ngIf="signupForm.controls['password'].hasError('minlength') && signupForm.controls['password'].touched">
+          password can not less then 6 characters
+        </div>
+        <div class="error-msg" *ngIf="signupForm.controls['password'].hasError('maxlength') && signupForm.controls['password'].touched">
+          password can not exceed 15 characters
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Contact Number</label>
+        <input type="number" class="form-control" name="phone" formControlName="phone" id="phone">
+        <div class="error-msg" *ngIf="signupForm.controls['phone'].hasError('required') && signupForm.controls['phone'].touched">
+          Please Enter Mobile Number
+        </div>
+        <div class="error-msg" *ngIf="signupForm.controls['phone'].hasError('pattern') && signupForm.controls['phone'].touched">
+          Please Enter Valid Mobile Number
+        </div>
+      </div>
+      <button class="btn btn-submit btn-block" type="submit" [disabled]="!signupForm.valid">submit</button>
+
+      <p class="or">
+        <span></span>Have Acount ?
+        <span></span>
+      </p>
+
+      <button class="btn btn-info btn-block" [routerLink]="['/login']">login</button>
+    </div>
+  </form>
+</section>

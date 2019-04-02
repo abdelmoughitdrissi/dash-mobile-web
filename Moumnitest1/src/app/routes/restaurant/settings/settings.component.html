@@ -1,0 +1,87 @@
+<div class="content-heading"> Paramétre
+  <small>
+    <a [routerLink]=" ['/home'] ">Dashboard</a> -> Paramétre</small>
+</div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 ">
+    <!-- START panel-->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong>Global</strong> Paramétre</div>
+      <div class="panel-body">
+        <form role="form" (ngSubmit)="onSubmitSetting(f)" #f="ngForm">
+          <div class="form-group">
+            <label>Global VAT*</label>
+            <input class="form-control" type="text" name="totalVat" id="totalVat" [(ngModel)]="settings.totalVat" placeholder="Enter Global VAT"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Total Tables*</label>
+            <input class="form-control" type="text" name="totalTables" id="totalTables" [(ngModel)]="settings.totalTables" placeholder="Enter Total Tables"
+            />
+          </div>
+
+          <!--Image  -->
+          <div class="form-group row">
+            <div class="col-md-3">
+              <label>Restaurant Image</label>
+            </div>
+            <div class="col-md-3">
+              <div class="btn-upload">
+                <button class="btn btn-info btn-sm" type="button">
+                  <i class="fa fa-upload" aria-hidden="true"></i> &nbsp; Select Image</button>
+              </div>
+              <input type="file" class="upload" ng2FileSelect [uploader]="uploader" accept="image/*" (change)="readUrl($event,1)" required="">
+            </div>
+            <div class="col-md-4">
+              <img class="thumb-upload" [src]="imageLogo" alt="Image" />
+            </div>
+            <div class="col-md-1">
+              <i class="fa fa-check fa-2x check-icon" aria-hidden="true" *ngIf="logoSelected"></i>
+              <button class="btn btn-info btn-sm upload-button" type="button" *ngIf="isNewImageSelected" (click)="onUpload(1)">Upload</button>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-md-3">
+              <label>Restaurant Icon</label>
+            </div>
+            <div class="col-md-3">
+              <div class="btn-upload">
+                <button class="btn btn-info btn-sm" type="button">
+                  <i class="fa fa-upload" aria-hidden="true"></i> &nbsp; Select Icon</button>
+              </div>
+              <input type="file" class="upload" ng2FileSelect [uploader]="uploader" accept="image/*" (change)="readUrl($event,2)" required="">
+            </div>
+            <div class="col-md-4">
+              <img class="thumb-upload" [src]="imageIcon" alt="Image" />
+            </div>
+            <div class="col-md-1">
+              <i class="fa fa-check fa-2x check-icon" aria-hidden="true" *ngIf="iconSelected"></i>
+              <button class="btn btn-info btn-sm upload-button" type="button" *ngIf="isNewIconSelected" (click)="onUpload(2)">Upload</button>
+            </div>
+          </div>
+          <!-- Image End -->
+          <div class="form-group row">
+            <div class="col-md-3">
+              <label>ADD Currency</label>
+            </div>
+            <div class="col-md-9">
+              <select class="custom-select" name="currency" [(ngModel)]="selectedCurrency" (change)="onSelectCurrency($event)">
+                <option selected disabled>Select Currency</option>
+                <option *ngFor="let Currency of currencyList;let i=index " [value]='Currency?.key'>
+                  {{Currency.currencyName}}-{{Currency.currencySign?.symbol}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <button class="btn btn-sm btn-success" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- END panel-->
+  </div>
+</div>

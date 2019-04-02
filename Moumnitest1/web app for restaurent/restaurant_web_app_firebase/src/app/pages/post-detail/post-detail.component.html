@@ -1,0 +1,206 @@
+<div class="breadcrumb-wrap">
+  <img src="assets/img/breadcrumbbg.jpg" class="bg-img">
+  <div class="overlay-bg"></div>
+
+  <div class="overlay-content">
+    <h1>Recent News/Post</h1>
+    <h6>Hello there, Read what is new for you.</h6>
+  </div>
+</div>
+
+<div class="post-content" *ngIf="loading === 1 ">
+  <div class="container">
+    <!--Section: Blog v.4-->
+    <section class="section section-blog-fw pt-5 mt-4 pb-3">
+
+      <!--Grid row-->
+      <div class="row post-details">
+        <div class="col-md-12">
+          <!--Featured image-->
+          <div class="card card-cascade wider reverse">
+            <div class="view overlay hm-white-slight">
+              <img src="{{postInfo.thumb}}" alt="post image">
+              <a>
+                <div class=""></div>
+              </a>
+            </div>
+            <!--Post data-->
+            <div class="card-body">
+              <h3 class="text-center">
+                <a>{{postInfo.title}}</a>
+              </h3>
+              <p class="text-right">
+                <span>12/12/2017</span>
+              </p>
+              <!--Social shares-->
+              <div class="social-share">
+                <h6>Share With: </h6>
+
+                <a class="icons-sm fb-ic" shareButton="facebook" sbUrl="{{socialShareLink}}">
+                  <i class="fa fa-facebook-official"></i>
+                </a>
+                <a class="icons-sm tw-ic" shareButton="twitter" sbUrl="{{socialShareLink}}">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icons-sm gplus-ic" shareButton="google" sbUrl="{{socialShareLink}}">
+                  <i class="fa fa-google"></i>
+                </a>
+                <a class="icons-sm li-ic" shareButton="linkedin" sbUrl="{{socialShareLink}}">
+                  <i class="fa fa-linkedin-square"></i>
+                </a>
+                <a class="icons-sm ins-wa" shareButton="whatsapp" sbUrl="{{socialShareLink}}">
+                  <i class="fa fa-whatsapp"></i>
+                </a>
+                <!--Instagram-->
+                <!-- <a class="icons-sm ins-ic"><i class="fa fa-instagram"></i></a>
+                          Pinterest
+                          <a class="icons-sm pin-ic"><i class="fa fa-pinterest"></i></a> -->
+              </div>
+              <!--Social shares-->
+            </div>
+            <!--Post data-->
+          </div>
+
+          <!--Excerpt-->
+          <div class="excerpt mt-5">
+            <p>{{postInfo.description}}</p>
+          </div>
+        </div>
+      </div>
+      <!--Grid row-->
+
+    </section>
+    <!--Section: Blog v.4-->
+  </div>
+  <!-- container -->
+  <!-- comment-list -->
+
+  <div class="comments-list">
+    <div class="container">
+      <div class="section-heading">
+        <h4>Comments
+          <span class="badge green">{{commentData.length}}</span>
+        </h4>
+      </div>
+      <!--First row-->
+      <div class="row list-item" *ngFor="let item of commentData">
+        <!--Image column-->
+        <div class="col-sm-2 col-12">
+          <img src="{{item.image}}">
+        </div>
+        <!--/.Image column-->
+        <!--Content column-->
+        <div class="col-sm-10 col-12">
+          <div class="row">
+            <div class="col-md-6">
+              <a>
+                <h5 class="user-name">{{item.name}}</h5>
+              </a>
+            </div>
+            <div class="card-data col-md-6 text-right">
+              <span class="comment-date">
+                <i class="fa fa-clock-o"></i> {{item.createdAt | date}}</span>
+            </div>
+          </div>
+          <p class="comment-text">{{item.message}}</p>
+        </div>
+        <!--/.Content column-->
+      </div>
+      <!--/.First row-->
+    </div>
+    <!-- container -->
+  </div>
+  <!--Section: Contact v.3-->
+  <section class="section mb-5">
+    <div class="container">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-md-12">
+          <!--Form with header-->
+          <div class="card">
+            <div class="card-body form">
+              <!--Header-->
+              <div class="formHeader mb-1 pt-3">
+                <h3>
+                  <i class="fa fa-envelope"></i> Leave a comment:</h3>
+              </div>
+              <br>
+              <form [formGroup]="commentForm">
+                <!--Grid row-->
+                <div class="row">
+                  <!--Grid column-->
+                  <div class="col-md-6">
+                    <div class="md-form">
+                      <div class="md-form">
+                        <input mdbActive type="text" id="form-contact-name" class="form-control" formControlName="name">
+                        <label for="form-contact-name" class="">Your name</label>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Grid column-->
+                  <!--Grid column-->
+                  <div class="col-md-6">
+                    <div class="md-form">
+                      <div class="md-form">
+                        <input mdbActive type="text" id="form-contact-email" class="form-control" formControlName="email">
+                        <label for="form-contact-email" class="">Your email</label>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Grid column-->
+                </div>
+                <!--Grid row-->
+                <!--Grid row-->
+                <div class="row">
+
+                  <!--Grid column-->
+                  <div class="col-md-12">
+
+                    <div class="md-form">
+                      <textarea mdbActive type="text" id="form-contact-message" class="md-textarea" formControlName="message"></textarea>
+                      <label for="form-contact-message">Your message</label>
+                      <a class="btn-floating  btn-lg float-md-right green waves-light" mdbRippleRadius>
+                        <i class="fa fa-send-o" (click)="submitComment()"></i>
+                      </a>
+                    </div>
+
+                  </div>
+                  <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+              </form>
+
+            </div>
+          </div>
+          <!--/Form with header-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+    </div>
+    <!-- container -->
+  </section>
+  <!--Section: Contact v.3-->
+</div>
+<br>
+<br>
+
+<!--loader -->
+<div class="preloader-wrap waiting" *ngIf="loading === 0 ">
+  <div class="loader waiting">
+    <span class="loader-item"></span>
+    <span class="loader-item"></span>
+    <span class="loader-item"></span>
+    <span class="loader-item"></span>
+    <span class="loader-item"></span>
+  </div>
+</div>
+<!-- loader -->
+
+<br>
+<br>
+<!-- post-content -->

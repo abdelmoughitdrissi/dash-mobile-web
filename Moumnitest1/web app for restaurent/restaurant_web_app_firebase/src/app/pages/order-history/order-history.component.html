@@ -1,0 +1,262 @@
+<div class="breadcrumb-wrap">
+  <img src="assets/img/chekout-bg.png" class="bg-img">
+  <div class="overlay-bg"></div>
+
+  <div class="overlay-content">
+    <h1>Order History</h1>
+
+  </div>
+</div>
+
+<!-- container -->
+<div class="container">
+  <section class="cart">
+
+    <!-- orders -->
+    <div class="table-wrapper" *ngFor=" let data of allOrders | paginate:{itemsPerPage:_limit, currentPage:_page, totalItems:_total}; let i = index ">
+      <div class="order-date">
+        {{data.createdAt|date}}
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="o img">
+                <label>Order ID:</label>
+                <p>{{data.orderId}}</p>
+              </th>
+              <th class="o detail">
+                <label>Status:</label>
+                <p>
+                  <span class="badge blue">{{data.status}}</span>
+                </p>
+              </th>
+              <th class="o total">
+                <label>Total:</label>
+                <p>{{currency}}{{data.grandTotal|number}}</p>
+              </th>
+              <th class="o review">
+                <button type="button" class="btn detail btn-sm  mb-4 btn-cyan waves-light" mdbRippleRadius (click)="productDetail.show()"
+                  (click)="viewDetail(i)">view details
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of data.cart;let j = index ">
+              <td>
+                <a (click)="viewItem(item)">
+                  <img src="{{item.item.thumb}}">
+                </a>
+              </td>
+              <td class="product-detail">
+
+                <a (click)="viewItem(item)">{{item.item.title}}</a>
+                <div class="row details">
+                  <label class="col-4">Price:</label>
+                  <div class="col-8 content">{{currency}} {{item.item.price.value | number}}</div>
+                </div>
+                <div class="row  details">
+                  <label class="col-4">Qty:</label>
+                  <div class="col-8 content">{{item.item.itemQunatity}}</div>
+                </div>
+              </td>
+
+              <td class="pt-3">
+                <p class="order-price-label">Total</p>
+                <span class="order-price">{{currency}}{{item.itemTotalPrice | number}}</span>
+              </td>
+              <td>
+                <!-- write review button -->
+
+                <button type="button" class="btn review mt-3 btn-sm btn-deep-orange waves-light" mdbRippleRadius (click)="writeReview.show()"
+                  (click)="rateProduct(item.item.itemId,data._id,j)" [disabled]="data.status!='Delivered' ">Write
+                  a Review
+                </button>
+                <!-- rating -->
+                <div *ngIf="item.ratingFlag == 1 ">
+                  <rating name="ratingReview" [(ngModel)]="item.rating" [max]="maxRat" [readonly]="true" [float]="true" stateOn="fa fa-star text-yellow"
+                    stateOff="fa fa-star-o">
+                  </rating>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- table-wrapper -->
+    <!--/ orders -->
+    <div class="row">
+      <div class="col-md-12">
+        <nav>
+          <ul class="pagination float-md-right">
+            <li class="page-item">
+              <pagination-controls (pageChange)="_page = $event"></pagination-controls>
+
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+
+    <!-- write-review-modal -->
+    <div mdbModal #writeReview="mdb-modal" class="modal review-modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="writeReview.hide()" #closeBtn>
+              <span aria-hidden="true">×</span>
+            </button>
+            <h6 class="modal-title w-100" id="myModalLabel">Write Your Review</h6>
+          </div>
+          <div class="modal-body">
+            <div class="form-group address add">
+
+              <form (ngSubmit)="onSaveRatingData()" #f="ngForm">
+                <div class="review-rating">
+                  <h3 class="title">Your Rating</h3>
+                  <!-- <ul class="rating">
+                                       <li><i class="fa fa-star"></i></li>
+                                       <li><i class="fa fa-star"></i></li>
+                                       <li><i class="fa fa-star"></i></li>
+                                       <li><i class="fa fa-star"></i></li>
+                                       <li><i class="fa fa-star"></i></li>
+                                   </ul> -->
+                  <div class="rating">
+                    <rating name="ratingReview" [(ngModel)]="review.rating" [max]="5" stateOn="fa fa-star text-yellow" stateOff="fa fa-star-o"
+                      [readonly]="false" [required]="true" [float]="true">
+                    </rating>
+                  </div>
+                </div>
+                <div class="md-form form-sm">
+                  <textarea mdbActive type="text" id="review" name="review" class="md-textarea" name="review" required [(ngModel)]="review.comment">
+    			</textarea>
+                  <label for="address">Review</label>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-elegant  waves-light" aria-label="Close" (click)="writeReview.hide()" mdbRippleRadius>Close
+                    </button>
+                  </div>
+                  <div class="col-md-6 ">
+                    <button type="button" class="btn float-md-right btn-success relative waves-light" type="submit" [disabled]="!f.valid" mdbRippleRadius>Submit
+                      Review
+                    </button>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <!-- write-review-modal -->
+    <!-- product-details-modal -->
+    <div mdbModal #productDetail="mdb-modal" class="modal order-details-modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="productDetail.hide()">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h6 class="modal-title w-100" id="myModalLabel">Order ID:
+              <span> #{{orderDetails.orderId}}</span>
+            </h6>
+          </div>
+          <div class="modal-body">
+            <!-- order-details -->
+            <div class="order-details">
+              <div class="order-header">
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                <span>Delivered:{{orderDetails.createdAt|date}}</span>
+              </div>
+              <div class="container-fluid wrapper">
+                <!-- item detail -->
+                <div class="row">
+                  <div class="col-6">
+                    <label>Order items:</label>
+                  </div>
+                  <div class="col-3 text-right">
+                    <label>Quantity</label>
+                  </div>
+                  <div class="col-3 text-right">
+                    <label>Price</label>
+                  </div>
+                </div>
+                <!-- item -->
+                <div class="row item" *ngFor="let data of orderDetails.cart">
+                  <div class="col-6">
+                    <a (click)="viewItem(data)">{{data.item.title}}</a>
+                  </div>
+                  <div class="col-3 text-right">
+                    <p class="Quantity">{{data.item.itemQunatity}}</p>
+                  </div>
+                  <div class="col-3 text-right">
+                    <p class="price">{{currency}} {{data.itemTotalPrice | number}}</p>
+                  </div>
+                </div>
+                <!--/ item -->
+                <div class="row">
+                  <div class="col-12 text-right">
+                    <label>Total</label>
+                    <h6 class="total">{{currency}}{{orderDetails.grandTotal|number}}</h6>
+                  </div>
+                </div>
+              </div>
+              <!-- container-fluid -->
+            </div>
+            <!-- payment-details -->
+            <div class="payment-details">
+              <div class="order-header">
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
+                <span>Recipient: Raghav Deshwali</span>
+              </div>
+              <div class="container-fluid wrapper">
+                <!-- item detail -->
+                <div class="row">
+                  <div class="col-4">
+                    <label>Delivery Address:</label>
+                  </div>
+                  <div class="col-4">
+                    <label>Customer Details:</label>
+                  </div>
+                  <div class="col-4 text-right">
+                    <label>Payment method</label>
+                  </div>
+                </div>
+
+                <div class="row item">
+                  <div class="col-4">
+                    <address>{{orderDetails.shippingAddress.address}}, {{orderDetails.shippingAddress.area}}, {{orderDetails.shippingAddress.city}}-
+                      {{orderDetails.shippingAddress.pincode}}
+                    </address>
+                  </div>
+                  <div class="col-4">
+                    <address>{{orderDetails.shippingAddress.name}} , {{orderDetails.shippingAddress.mobileNo}}
+                    </address>
+                  </div>
+                  <div class="col-4 text-right">
+                    <p class="payment-method">{{orderDetails.paymentType}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- container-fluid -->
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <button type="button" class="btn btn-elegant  waves-light" aria-label="Close" (click)="productDetail.hide()" mdbRippleRadius>Close
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <!-- product-details-modal -->

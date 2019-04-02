@@ -1,0 +1,54 @@
+<div class="content-heading"> Ajouter Devise
+  <small>
+    <a [routerLink]=" ['/home'] ">Home</a> ->
+    <a [routerLink]="['/currencies/all']"> Devise </a>
+    New Devise
+  </small>
+</div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <!-- START panel-->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong>New</strong> Devise</div>
+      <div class="panel-body">
+        <form (ngSubmit)="onAddCurrency()" #f="ngForm">
+          <div class="row">
+            <div class="col-md-2">
+              <label>Devise Nom*</label>
+            </div>
+            <div class="col-md-10">
+              <input class="form-control custom-text" type="text" placeholder="Enter Currency" name="currency" id="currency" [(ngModel)]="currency.currencyName"
+                required="true" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+              <label>Devise Symbol*</label>
+            </div>
+            <div class="col-md-10">
+              <input class="form-control custom-text" type="text" placeholder="Enter Currency symbole" name="sign" id="sign" [(ngModel)]="currency.currencySign.symbol"
+                required="true" />
+            </div> &nbsp; &nbsp; &nbsp;
+            <a href="https://en.wikipedia.org/wiki/Currency_symbol" target="_blank">Devise Symbol List</a>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-10">
+              <div class="col-md-2"></div>
+              <div class="col-md-9">
+                <button class="btn btn-primary coustom-save-btn" type="submit" [disabled]="!f.valid">Ajouter Devise
+                </button>
+              </div>
+              <div class="col-md-1">
+                <button class="btn btn-danger pull-right s-n-btn " (click)="cancel()">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- END panel-->
+  </div>
+</div>

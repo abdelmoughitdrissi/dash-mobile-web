@@ -1,0 +1,12 @@
+/////////////////////////////
+// find and replace this block from build.gradle if error comes while running build command
+
+defaultConfig {
+        multiDexEnabled true
+        versionCode cdvVersionCode ?: new BigInteger("" + privateHelpers.extractIntFromManifest("versionCode"))
+        applicationId privateHelpers.extractStringFromManifest("package")
+
+        if (cdvMinSdkVersion != null) {
+            minSdkVersion cdvMinSdkVersion
+        }
+    }

@@ -1,0 +1,434 @@
+<div class="breadcrumb-wrap">
+  <img src="assets/img/chekout-bg.png" class="bg-img">
+  <div class="overlay-bg"></div>
+
+  <div class="overlay-content">
+    <h1>Checkout</h1>
+    <h6>chekout or shop more...</h6>
+  </div>
+</div>
+
+<section class="checkout">
+  <!-- container -->
+  <div class="container">
+
+    <!-- address section -->
+    <div class="wrapper">
+      <ul class="stepper stepper-horizontal">
+        <li [ngClass]="{'active': activeClassVisible1 }">
+          <a (click)="addresStepShow()">
+            <span class="label">Delivery Adress</span>
+          </a>
+        </li>
+        <li [ngClass]="{'active': activeClassVisible2 }">
+          <a (click)="orderSummaryStepShow(0)">
+            <span class="label">Order Summary</span>
+          </a>
+        </li>
+        <li [ngClass]="{'active': activeClassVisible3 }">
+          <a (click)="paymentStepShow()">
+            <span class="label">Payment options</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- address Section-->
+
+
+      <section class="address-content">
+        <div class="adddress-wrapper" *ngIf="addresStep">
+          <div class="section-title">
+            Select your delivery address
+            <span class="hidden-md-down"></span>
+          </div>
+          <!-- row adress -->
+          <div class="row">
+            <div class="col-md-6" *ngFor="let address of savedAddresses; let i=index ">
+              <!-- radio for address -->
+              <div class="form-group address">
+                <a class="edit-link" (click)="editAddress.show()" (click)="getSingleAddressData(i, address._id)">Edit</a>
+                <!-- <input name="group2" type="radio" checked="check" class="with-gap" id="address1" (click)="editAddressShow()"> -->
+                <label for="address1">
+                  <p class="name">{{address.name}}</p>
+                  <p class="phone">{{address.mobileNo}}</p>
+                  <p>{{address.address}},&nbsp;{{address.city}}
+                    <br> {{address.pincode}}
+                    <br>
+                  </p>
+                  <div *ngIf="address.selected">
+                    <i class="selectedAddress fa fa-check"> Selected</i>
+                  </div>
+                </label>
+                <button class="btn btn-main" (click)="orderSummaryStepShow(i)">Deliver here</button>
+              </div>
+            </div>
+            <!-- col-md-4 -->
+
+
+            <!-- col-12 radio for new address -->
+            <div class="col-md-12">
+              <div class="form-group address add">
+                <input name="group2" type="radio" class="with-gap" id="addAddress" (click)="addAddressShow()">
+                <label for="addAddress" class="add-addres-label">
+                  <i class="fa fa-plus" aria-hidden="true"></i> add new address
+                </label>
+
+                <div class="address-form animated fadeIn" *ngIf="addAddress">
+                  <form (ngSubmit)="onSaveNewAddress(a)" #a="ngForm">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="name" class="form-control" name="name" [(ngModel)]="newAddress.name"
+                            mdbActive>
+                          <label for="name">Name</label>
+                        </div>
+                        <div class="md-form form-sm col-md-6">
+                          <input type="tel" id="phone" class="form-control" name="mobileNo" [(ngModel)]="newAddress.mobileNo"
+                            mdbActive>
+                          <label for="phone">Phone Number</label>
+                        </div>
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="pincode" class="form-control" name="pincode" [(ngModel)]="newAddress.pincode"
+                            mdbActive>
+                          <label for="pincode">Pincode</label>
+                        </div>
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="locality" class="form-control" name="area" [(ngModel)]="newAddress.area"
+                            mdbActive>
+                          <label for="locality">Locality</label>
+                        </div>
+                        <div class="md-form form-sm col-md-6">
+                          <textarea mdbActive type="text" id="address" name="address" [(ngModel)]="newAddress.address"
+                            class="md-textarea">
+
+
+
+    			                </textarea>
+                          <label for="address">Address</label>
+                        </div>
+
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="city" class="form-control" name="city" [(ngModel)]="newAddress.city"
+                            mdbActive>
+                          <label for="city">City</label>
+                        </div>
+                        <div class="col-md-12 text-right btn-wrapper">
+                          <button class="btn btn-save" type="submit">save and deliver here
+                          </button>
+
+                          <button class="btn btn-flat" mdbRippleRadius type="button" (click)="clearForm()">cancel
+                          </button>
+                        </div>
+                      </div>
+                      <!-- row -->
+                    </div>
+                    <!-- container -->
+                  </form>
+                </div>
+                <!-- address-form -->
+              </div>
+            </div>
+            <!-- new adddres readio  -->
+
+          </div>
+          <!-- row addres -->
+        </div>
+        <!--/ address-wrapper -->
+      </section>
+      <!-- address-section -->
+
+
+      <!-- order summary Section -->
+
+
+      <section class="cart order-review" *ngIf="orderSummaryStep">
+        <div class="empty-message" *ngIf="hideCart">
+          <i class="fa fa-5x fa-shopping-basket" aria-hidden="true"></i>
+          <h5>
+            <br>Sorry
+            <br>
+            <br>Please add some Food Items. </h5>
+        </div>
+        <div class="table-wrapper" *ngIf="!hideCart">
+          <div class="table-responsive">
+            <table class="table table-responsive">
+              <thead>
+                <tr>
+                  <th class="img"></th>
+                  <th class="detail"></th>
+                  <th class="img"></th>
+                  <th class="detail"></th>
+
+                  <th class="qty">Quantity</th>
+                  <th class="price">Price</th>
+                  <th class="total">Total</th>
+                  <th class="remove"></th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <!-- product row -->
+                <tr *ngFor="let cartItem of cart; let i=index ">
+                  <td>
+                    <img src="{{cartItem.item.thumb}}">
+                  </td>
+                  <td class="product-detail">
+
+                    <a (click)="viewItem(cartItem._id)">{{cartItem.item.title}}</a>
+                    <span class="badge badge-info">In stock</span>
+                    <div *ngFor="let data of cartItem.item?.extraOptions; let j=index;">
+                      <input class="form-check-input" type="checkbox" [checked]="data.selected" [(ngModel)]="data.selected"
+                        id="{{data.name}}" name="{{data.name}}" (change)="selectExtraIngredient(i,j)">
+                      <label class="form-check-label" for="{{data.name}}">
+                        {{data.name}} {{currency}}{{data.value}}
+                      </label>
+                    </div>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td class="pt-4">
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-success" (click)="reduceQuantity(i)">
+                        <i class="fa fa-minus"></i>
+                      </button>
+                      <span>{{cartItem.item.itemQunatity}}</span>
+                      <button class="btn btn-sm btn-success" (click)="addQuantity(i)">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </div>
+                  </td>
+                  <td class="pt-4">
+                    <span class="price">{{currency}}{{cartItem.item.price.value.toFixed(2)}}</span>
+                  </td>
+                  <td class="pt-4">
+                    <span class="price">{{currency}}{{cartItem.itemTotalPrice.toFixed(2)}}</span>
+                  </td>
+                  <td class="pt-4">
+                    <button class="btn remove btn-sm btn-flat" data-toggle="tooltip" data-placement="top" title="Remove"
+                      (click)="OnDelete(i)">
+                      <i class="fa fa-times-circle red-text" aria-hidden="true"></i>
+                    </button>
+                  </td>
+                </tr>
+                <!-- product-row -->
+              </tbody>
+            </table>
+          </div>
+          <!-- total amount -->
+          <div class="amount-wrapper row">
+            <div class="col-md-7">
+              <!-- for empty space -->
+            </div>
+            <div class="col-md-5">
+              <div class="row">
+                <label class="col-6">Amount:</label>
+                <div class="col-6 amount text-right">{{currency}}{{cartTotalAmount.toFixed(2)}}</div>
+
+                <label class="col-6">Tax Amount:</label>
+                <div class="col-6 amount text-right">{{currency}}{{taxAmount.toFixed(2)}}</div>
+
+                <!-- <label class="col-6">Shipping charge:</label>
+                <div class="col-6 amount text-right">${{shippingCharges|number}}</div> -->
+
+                <label class="col-6">Coupons :</label>
+                <div class="col-6 amount text-right">
+                  <select class="mdb-select" #y (change)="applyCoupon(y.value)">
+                    <option selected="" value="0+NoCouponApplied"> Offers</option>
+                    <option *ngFor="let data of allCouponsData" value="{{data.value}}+{{data.name}}">
+                      {{data.name}}&nbsp;({{data.value}}%)
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="row" *ngIf="couponDiscountPercentage > 0">
+                <label class="col-6">Coupon Name:</label>
+                <div class="col-6 amount text-right">{{couponName}}</div>
+                <label class="col-6">Percentage Off:</label>
+                <div class="col-6 amount text-right">{{currency}}{{deductedAmountByCoupon|number}}&nbsp;({{couponDiscountPercentage}}%)</div>
+              </div>
+
+              <div class="row" *ngIf="loyalityStatus">
+                <label class="col-6">Loyality Points:</label>
+                <div class="col-6" *ngIf="canApplyLoyalityPointe">
+                  <div class="form-group text-right">
+                    <input type="checkbox" (ngModelChange)="applyLoyalityPoints($event)" id="checkbox2" name="applyLoyality"
+                      [(ngModel)]="applyLoyality">
+                    <label for="checkbox2">Apply</label>
+                  </div>
+                </div>
+                <div class="col-6 amount text-right" *ngIf="!canApplyLoyalityPointe">
+                  <span class="error-msg">You don't have enough loyality points</span>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="col-6 total">Total Amount:</label>
+                <div class="col-6 total-amount text-right">{{currency}}{{GrandTotal.toFixed(2)}}</div>
+              </div>
+              <button class="btn btn-checkout" [routerLink]="['/checkout']" (click)="paymentStepShow()">
+                Pay now
+              </button>
+            </div>
+          </div>
+          <!-- amount-wrapper -->
+        </div>
+        <!-- table-wrapper -->
+      </section>
+      <!-- order-review-section -->
+      <!-- order summary Section End -->
+      <section class="payment" *ngIf="paymentStep">
+        <div class="section-title">
+          Select your payment method
+          <span class="hidden-md-down"></span>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <input name="payment" type="radio" class="with-gap" id="debit" (click)="addCardShow()">
+              <label for="debit">
+                <strong>Debit / Credit Card</strong>
+              </label>
+            </div>
+            <!-- &lt;!&ndash; credit-card-input feilds &ndash;&gt; -->
+            <div class=" animated fadeIn" *ngIf="addCard">
+              <button type="button" class="btn btn-main cod paypal" ripple-radius (click)="openCheckout()">
+                Confirm order
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <div class="form-group">
+              <input name="payment" type="radio" class="with-gap" id="paypal" (click)="paypalShow()">
+              <label for="paypal">
+                <strong> PayPal</strong>
+              </label>
+            </div>
+            <div *ngIf="paypal">
+              <button type="button" class="btn btn-main cod paypal" [disabled]="payPalStaus" ripple-radius (click)="placeOrderOnPayPal()">Confirm
+                order
+              </button>
+            </div>
+          </div>
+          <!-- <div class="col-3" id="myContainerElement" ></div> -->
+          <div class="col-3" id="paypal-button"></div>
+        </div>
+        <!-- paypal-row end -->
+        <div class="row" *ngIf="isDeliveryAvailable">
+          <div class="col-12">
+            <div class="form-group">
+              <input name="payment" type="radio" class="with-gap" id="cod" (click)="codShow()">
+              <label for="cod">
+                <strong> Cash on Delivery (COD)</strong>
+              </label>
+            </div>
+            <div *ngIf="cod">
+              <button type="button" class="btn btn-main cod" ripple-radius (click)="orderPlaced()">Confirm order
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- cod-row end -->
+
+        <div class="row" *ngIf="!isDeliveryAvailable">
+          <div class="col-12">
+            <div class="form-group">
+              <input name="payment" disabled type="radio" class="with-gap" id="cod" (click)="codShow()">
+              <label for="cod">
+                <strong> Cash on Delivery (COD)</strong>
+              </label>
+              <label for="cod">
+                <strong> *Delivery not available in this area</strong>
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- cod-row end -->
+      </section>
+      <!-- payment-section -->
+    </div>
+    <!-- wrapper -->
+  </div>
+  <!--  container -->
+
+  <!-- edit address modal -->
+  <div mdbModal #editAddress="mdb-modal" class="modal edit-address-modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="myeditAddressLabel" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="editAddress.hide()"
+            #closeUpdateModal>
+            <span aria-hidden="true">×</span>
+          </button>
+          <h6 class="modal-title w-100" id="myModalLabel">Edit Address</h6>
+        </div>
+        <div class="modal-body">
+          <div class="form-group address add">
+            <div class="">
+              <form (ngSubmit)="onUpdateAddress(p)" #p="ngForm">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="md-form form-sm col-md-6">
+                      <input type="text" id="nameu" class="form-control" name="name" [ngModel]="updateAddressData.name"
+                        mdbActive>
+                      <label for="name">Name</label>
+                    </div>
+                    <div class="md-form form-sm col-md-6">
+                      <input type="tel" id="phoneu" class="form-control" name="mobileNo" [ngModel]="updateAddressData.mobileNo"
+                        mdbActive>
+                      <label for="phone">Phone Number</label>
+                    </div>
+                    <div class="md-form form-sm col-md-6">
+                      <input type="text" id="pincodeu" class="form-control" name="pincode" [ngModel]="updateAddressData.pincode"
+                        mdbActive>
+                      <label for="pincode">Pincode</label>
+                    </div>
+                    <div class="md-form form-sm col-md-12">
+                      <textarea mdbActive type="text" id="apartmentNameu" name="address" [ngModel]="updateAddressData.address"
+                        class="md-textarea"></textarea>
+                      <label for="address">Address</label>
+                    </div>
+                    <div class="md-form form-sm col-md-6">
+                      <input type="text" id="cityu" class="form-control" name="city" [ngModel]="updateAddressData.city"
+                        mdbActive>
+                      <label for="city">City</label>
+                    </div>
+
+                    <div class="md-form form-sm col-md-6">
+                      <input type="text" id="localityu" class="form-control" name="area" [ngModel]="updateAddressData.area"
+                        mdbActive>
+                      <label for="locality">Locality</label>
+                    </div>
+
+                  </div>
+                  <!-- row -->
+                </div>
+                <!-- container -->
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-elegant  waves-light" aria-label="Close" (click)="editAddress.hide()"
+                      mdbRippleRadius>Close
+                    </button>
+                  </div>
+                  <div class="col-md-6 ">
+                    <button type="button" class="btn float-md-right btn-success relative waves-light" type="submit"
+                      mdbRippleRadius>Save
+                      changes
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- address-form -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- edit address-modal -->
+
+</section>
+<!-- checkout -->

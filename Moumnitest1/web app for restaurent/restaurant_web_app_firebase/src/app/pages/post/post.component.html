@@ -1,0 +1,81 @@
+<div class="breadcrumb-wrap">
+    <img src="assets/img/breadcrumbbg.jpg" class="bg-img">
+    <div class="overlay-bg"></div>
+
+    <div class="overlay-content">
+        <h1>Recent News/Post</h1>
+        <h6>Hello there, Read what is new for you.</h6>
+    </div>
+</div>
+
+
+<div class="post-content">
+    <section class="section pb-3">
+        <!--Section heading-->
+        <h1 class="section-heading h1 pt-4 text-center">Recent posts</h1>
+        <div class="preloader-wrap waiting" *ngIf="loading === 0 ">
+            <div class="loader waiting">
+                <span class="loader-item"></span>
+                <span class="loader-item"></span>
+                <span class="loader-item"></span>
+                <span class="loader-item"></span>
+                <span class="loader-item"></span>
+            </div>
+        </div>
+        <div class="container" *ngIf="loading === 1 ">
+            <!--Grid row-->
+            <div class="row post" *ngFor="let item of postlist| paginate: { itemsPerPage: 3, currentPage : p, totalItems: postlist.length }">
+                <!--Grid column-->
+                <div class="col-md-5 col-12 pb-3">
+                    <!--Featured image-->
+                    <div class="view overlay hm-white-slight waves-light" mdbRippleRadius>
+                        <img src="{{item.thumb}}" alt="img">
+                        <a>
+                            <div class="mask"></div>
+                        </a>
+                    </div>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-md-7 col-12">
+                    <!--Excerpt-->
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="" class="green-text">
+                                <h6 class="font-bold pb-1">
+                                    <i class="fa fa-cutlery"></i>
+                                    Food</h6>
+                            </a>
+                        </div>
+                        <div class="col-6 text-right date">19/12/2017</div>
+                    </div>
+                    <h4 class="mb-4">
+                        <strong>{{item.title}}</strong>
+                    </h4>
+                    <p>{{item.shortDescription}}</p>
+                    <a class="btn btn-success mb-3 waves-light pull-right" mdbRippleRadius (click)="getDetail(item._id)">Read more</a>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!-- pagination -->
+            <div class="row">
+                <div class="col-md-12">
+                    <nav>
+                        <ul class="pagination float-md-right">
+                            <li class="page-item">
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- pagination-end -->
+                </div>
+                <!-- col-end -->
+            </div>
+            <!-- row-end -->
+            <!-- pagination end -->
+            <!--Grid row-->
+        </div>
+        <!-- container -->
+    </section>
+</div>
+<!-- post-content -->

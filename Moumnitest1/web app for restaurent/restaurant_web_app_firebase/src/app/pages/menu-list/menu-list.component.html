@@ -1,0 +1,100 @@
+<div class="breadcrumb-wrap">
+	<img src="assets/img/breadcrumbbg.jpg" class="bg-img">
+	<div class="overlay-bg"></div>
+
+	<div class="overlay-content">
+		<h1>Menu</h1>
+		<h6>Hello, are you ready to taste something new ?</h6>
+	</div>
+</div>
+
+<!--loader -->
+<div class="preloader-wrap waiting" *ngIf="loading === 0 ">
+	<div class="loader waiting">
+		<span class="loader-item"></span>
+		<span class="loader-item"></span>
+		<span class="loader-item"></span>
+		<span class="loader-item"></span>
+		<span class="loader-item"></span>
+	</div>
+</div>
+<!-- loader -->
+<!-- no data found -->
+<div class="empty-message" *ngIf="loading === 2 ">
+	<i class="fa fa-5x fa-frown-o" aria-hidden="true"></i>
+	<h5>
+		<br>Sorry
+		<br>
+		<br> Food Item is not available. </h5>
+</div>
+<!-- No data found end -->
+
+<!-- container -->
+<div class="container">
+	<!-- menu-section -->
+	<section class="menu-content">
+		<div *ngIf="loading === 1 ">
+			<div class="menu">
+				<div class="section-header">
+					<h2>Our Menus</h2>
+					<div class="bottom-border">
+						<span></span>
+						<img src="assets/img/icon/spoon.png">
+						<span></span>
+					</div>
+				</div>
+				<!--  section-header -->
+
+				<div class="row ">
+					<div class="col-md-6" *ngFor="let item of menusData | paginate: { itemsPerPage: 8, currentPage : p, totalItems: menusData.length }">
+						<!-- menu-item -->
+						<div class="menu-item row card" (click)="exploreMenu(item._id)">
+							<!-- image col -->
+							<div class="col-3">
+								<img src="{{item.thumb}}">
+							</div>
+							<!-- content col -->
+							<div class="col-9 pt-3">
+								<div class="header">
+									<div class="title">{{item.title}}</div>
+									<!-- <div class="empty"></div>
+									<div class="price">{{item.price}}</div> -->
+								</div>
+								<p class="details">{{item.description}}
+								</p>
+							</div>
+							<!-- content-col -->
+						</div>
+						<!-- menu-item-end -->
+					</div>
+					<!-- col -->
+
+				</div>
+				<!-- row-end -->
+			</div>
+			<!-- menu-end -->
+			<br>
+
+			<!-- pagination -->
+			<div class="row">
+				<div class="col-md-12">
+					<nav>
+						<ul class="pagination float-md-right">
+							<li class="page-item">
+								<pagination-controls (pageChange)="p = $event"></pagination-controls>
+								<!-- <a class="page-link"  aria-label="Previous">
+			        <span aria-hidden="true">&lt;</span>
+			      </a> -->
+							</li>
+
+						</ul>
+					</nav>
+					<!-- pagination-end -->
+				</div>
+				<!-- col-end -->
+			</div>
+			<!-- row-end -->
+			<!-- pagination end -->
+		</div>
+	</section>
+</div>

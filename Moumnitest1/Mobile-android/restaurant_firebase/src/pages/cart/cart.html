@@ -1,0 +1,120 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{"MyCart" | translate}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only color="royal" class="header-btn">
+                <ion-icon name="cart"></ion-icon>
+                <div *ngIf="noOfItems > 0">
+                    <ion-badge class="carts" item-right color="danger">{{noOfItems}}</ion-badge>
+                </div>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content [ngClass]="{bg:!isCart()}">
+    <div *ngIf="!isCart()">
+        <ion-row>
+            <ion-icon class="empty-cart" name="cart"></ion-icon>
+        </ion-row>
+        <h4>Your Cart is empty!</h4>
+        <button ion-button class="empty-btn" (click)="gotoHome()">{{'Add Items' | translate}}</button>
+    </div>
+    <div *ngIf="isCart()">
+        <ion-list class="cart-list" *ngFor="let data of Cart">
+            <!-- item-list -->
+            <ion-item class="cart-item">
+                <!-- item -->
+                <ion-row class="full">
+                    <ion-col col-12>
+                        <!-- col-for item-image and details -->
+                        <ion-row>
+                            <ion-col col-4>
+                                <!-- item-image -->
+                                <img src={{data.item.thumb}} alt="">
+                            </ion-col>
+                            <ion-col col-8>
+                                <p class="item-name" text-wrap>{{data.item.title}}</p>
+                                <p class="item-detail" text-wrap>{{"Quantity:" | translate}} {{data.item.itemQunatity}}</p>
+                                <p class="item-detail" text-wrap>{{"Taille:" | translate}} {{data?.item?.price?.pname}}</p>
+                                <span *ngIf="data.item.price.specialPrice">
+                                    <p class="item-detail">Prix:
+                                        <span class="item-price">
+                                            <strong class="cut"> {{data.item.price.value | number:'.2-2'}}{{currency?.currencySymbol}}</strong>
+                                        </span>
+                                    </p>
+                                    <p class="item-detail">Special Price:
+                                        <span class="item-price">
+                                            <strong> {{data.item.price.specialPrice | number:'.2-2'}} {{currency?.currencySymbol}}</strong>
+                                        </span>
+                                    </p>
+                                </span>
+                                <span *ngIf="!data.item.price.specialPrice">
+                                    <p class="item-detail">{{"Prix:" | translate}}
+                                        <span class="item-price"> {{data.item.price.value | number:'.2-2'}}{{currency?.currencySymbol}}</span>
+                                    </p>
+                                </span>
+
+                                <!-- row-for count item -->
+
+                                <ion-row class="counter">
+                                    <!-- row-for count item -->
+                                    <ion-col col-10>
+
+                                        <div class="count">
+                                            <span class="item-count" (click)="remove(data)">
+                                                -
+                                            </span>
+                                            <span class="item-count show-count">
+                                                {{data.item.itemQunatity}}
+                                            </span>
+                                            <span class="item-count" (click)="add(data)">
+                                                +
+                                            </span>
+                                        </div>
+                                    </ion-col>
+                                    <ion-col col-2>
+                                        <ion-icon name="trash" (click)="deleteItem(data)"></ion-icon>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-list>
+        <ion-row class="price-details">
+            <ion-col class="calculate" col-12>
+                <p class="bill-detail">{{"Prix Subtotal" | translate}}
+                    <span> {{subTotal | number:'.2-2'}} {{currency?.currencySymbol}}</span>
+                </p>
+                <div *ngIf="deductedPrice">
+                    <p class="bill-detail">{{'Deducted Price' | translate}}
+                        <span> - {{deductedPrice | number:'.2-2'}}{{currency?.currencySymbol}}</span>
+                    </p>
+                </div>
+
+                <p class="bill-detail">{{"Total TVA " | translate}}({{settings.totalVat }}%)
+                    <span>{{total}}{{currency?.currencySymbol}} </span>
+                </p>
+                <p class="bill-detail">{{"autre Taxes" | translate}}
+                    <span> {{otherTaxes}}%</span>
+                </p>
+                <hr>
+               
+                <p class="coupon-applied" *ngIf="deductedPrice">Coupon Applied.</p>
+                <div class="cart-total">
+                    <strong>{{" Total" | translate}}</strong>
+                    <span class="price"> {{GrandTotal | number:'.2-2'}}{{currency?.currencySymbol}} </span>
+                </div>
+            </ion-col>
+        </ion-row>
+        <!-- row-bill-details -->
+        <!-- continue button -->
+        <ion-row>
+            <ion-col col-12>
+                <button ion-button block class="continue-btn" (click)="nav()">{{"Continue"| translate}}</button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

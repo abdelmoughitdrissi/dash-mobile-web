@@ -1,0 +1,57 @@
+<div class="content-heading">Devise
+  <div class="pull-right">
+    <label class="file-upload">
+      <a [routerLink]="'/currencies/addCurrency'">
+        <button class="btn btn-success">
+          <em class="fa fa-plus"></em>&nbsp;&nbsp;Ajouter un Devise</button>
+      </a>
+    </label>
+  </div>
+  <small>
+    <a [routerLink]=" ['/home'] ">Home</a> -> Devise
+  </small>
+</div>
+
+<div class="waiting-loader" *ngIf="loading == true">
+  <i class="fa fa-5x fa-spin fa-spinner" aria-hidden="true"></i>
+</div>
+
+<!-- Zero Configuration-->
+<div *ngIf="loading == false">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">Manager sa Devise  </div>
+      <div class="panel-body">
+        <div class="table-responsive" *ngIf="currency.length >0">
+          <table datatable="" class="table table-striped">
+            <thead>
+              <tr>
+                <th class="wd-md text-center custom">Nom</th>
+                <th class="text-center">Modifier</th>
+                <th class="text-center">Supprimer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center" *ngFor="let data of currency ;let i= index ">
+                <td>
+                  <a href="">{{data.currencyName}}</a>
+                </td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-default" type="button" (click)="currencyEdit(data.key)">
+                    <em class="fa fa-pencil"></em>
+                  </button>
+                </td>
+                <td class="text-center">
+                  <button class="btn btn-sm btn-default" type="button" (click)="currencyDelete(data.key,i)">
+                    <em class="fa fa-trash-o"></em>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

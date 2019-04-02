@@ -1,0 +1,202 @@
+//common for cart page and order history
+.cart{
+	margin-top: 3.6rem;
+	min-height: 20rem;
+	.order-date{
+		    background: $white-b;
+		    padding: 14px 10px;
+		    color: $primary;
+		    font-weight: 500;
+		    font-size: 15px;
+		    letter-spacing: 1px;
+		    border-radius: 4px;
+		    border-bottom: 0;
+		    border-bottom-left-radius: 0;
+    		border-bottom-right-radius: 0;
+	}
+	.table-wrapper{
+		    border-radius: 5px;
+		    border:1px solid $white-c;
+		    margin-bottom: 2rem;
+		.table > thead > tr > {
+			th{
+				color: $black-c;
+				font-weight: 600;
+				text-transform: uppercase;
+				font-size: 13px;
+				letter-spacing: 1px;
+				padding-bottom: 10px;
+				text-align: center;
+			}
+			th.img{width: 25%;}
+			th.detail{width: 30%;}
+			th.qty{width: 15%;}
+			th.price{width: 10%;}
+			th.total{width: 10%;}
+			th.remove{width: 10%;}
+
+			// header style for order detail page
+			th.o{
+				letter-spacing: 0;
+				p{color: $primary;}
+			}
+			th.o.img{width: 25%;}
+			th.o.detail{width: 40%;}
+			th.o.total{width: 15%;}
+			th.o.review{width: 20%;}
+			th >.btn.detail{
+				padding: 0.5rem 1rem;
+			    border-radius: 3px;
+			    font-weight: 500;
+			    letter-spacing: 1px;
+			    box-shadow: none;
+			}
+
+		}
+		tbody > tr{
+			background: $white-a;
+			text-align: center;
+			&:hover,:focus,:active{
+				background: transparent;
+			}
+			.product-detail{
+				text-align: left;
+				[type="radio"] + label, [type="checkbox"] + label{
+					font-size: 13px;
+					font-weight: 500;
+					opacity: 0.8;
+				}
+				[type="checkbox"]:checked + label:before{
+					top: 2px!important;
+					width: 8px!important;
+					height: 13px!important;
+					border-width: 1px!important;
+					border-color: transparent #25c851 #25c851 transparent!important;
+				}
+			}
+			.data{
+				color: $primary;
+				font-weight: 400;
+			}
+			.btn.remove{
+				margin: 0;
+				box-shadow: none;
+				padding: 4px 10px;
+				font-weight: 500;
+				.fa{font-size: 16px;}
+			}
+			.btn.review{
+				padding: 0.5rem 1rem;
+			    border-radius: 3px;
+			    font-weight: 500;
+			    letter-spacing: 1px;
+			    box-shadow: none;
+			}
+
+			.rating{
+				li{
+					transition: all .25s ease;
+					color: $rating-color;
+				}
+			}//rating
+			.star-icon{font-size: 1.5rem!important;}
+		}
+		img{
+			margin: 0 auto;
+			display: block;
+	  		height: 5rem;
+    		width: 8rem;
+		}
+		a{
+			color: $primary;
+			font-weight: 500;
+			display: block;
+			margin-bottom: 2px;
+		}
+		.price{
+			color: $black-c;
+			font-size: 15px;
+			font-weight: 600;
+		}
+		.btn-group{
+			.btn,span{
+				box-shadow: none;
+				margin: 0;
+			    box-shadow: none;
+			    padding: 0;
+			    height: 24px;
+			    line-height: 24px;
+			    width: 31px;
+			    border-top: 1px solid $primary;
+			    border-bottom: 1px solid $primary;
+			    text-align: center;
+			    color: $black-b;
+			    font-weight: 500;
+			    font-size: 13px;
+			    .fa{
+			    	font-size: 11px;
+			    }
+			}
+
+		} //btn-group
+		.amount-wrapper{
+			padding: 1rem 2rem 1rem 0;
+			border-top: 1px solid $white-c;
+			margin: 0;
+			label,.amount{
+				color: $black-c;
+				font-weight: 500;
+			}
+			.total,.total-amount{
+				color: $black-b;
+				font-weight: 600;
+				border-top:1px solid $white-b;
+				padding: 1rem;
+			}
+			.btn{
+				width: 12rem;
+				max-width: 100%;
+				padding: 0.85rem 8px;
+				margin: 0 0 1rem;
+			}
+			.btn-checkout{
+				background: $primary!important;
+				margin-left:0;
+			}
+			select{
+				height: 2.1rem;
+				padding: 6px 14px;
+				font-size: 15px;
+				border-radius: 4px;
+				color: $black-c;
+				border-color: $white-d;
+				width: 100%;
+				margin-bottom: 1rem;
+			}
+
+		}
+		// product details for order history page
+		.details{
+			color: $black-b;
+			label{
+				font-weight: 400;
+			}
+			.content{
+				font-weight: 500;
+			}
+		}
+		.order-price-label{
+			color: $primary;
+			font-weight: 400;
+		}
+		.order-price{
+			font-weight: 500;
+			color: $black-c;
+		}
+		.date{
+			font-weight: 500;
+			font-size: 13px;
+			color: $primary;
+		}
+	} //table-wrapper
+}//cart

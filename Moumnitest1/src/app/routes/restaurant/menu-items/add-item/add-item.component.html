@@ -1,0 +1,144 @@
+<div class="content-heading"> Add Menu Item
+    <small><a [routerLink]=" ['/home'] ">Dashboard</a> ->
+        <a [routerLink]="['/menu/manageItems']"> Menu Items </a>->
+        Add Menu Item
+    </small>
+</div>
+<!-- START panel-->
+<div class="panel panel-default">
+    <div class="panel-heading">Item Details</div>
+    <div class="panel-body">
+        <form (ngSubmit)="onSubmitMainItems(f)" #f="ngForm">
+            <fieldset>
+                <label class="col-sm-2 control-label custom" for="title">Title*</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" name="title" id="title" [(ngModel)]="menuItems.title"
+                                   type="text" required placeholder="Menu Item Name"/>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Menu Description
+                </label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <textarea class="form-control" name="description" id="description"
+                                      [(ngModel)]="menuItems.description" required="" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Offer Percentage
+                </label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <input class="form-control" type="number" name="offerPercentage" id="offerPercentage"
+                                   [(ngModel)]="menuItems.offerPercentage" required="" rows="3">
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Category</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <select class="form-control" name="category" id="category" [(ngModel)]="menuItems.category" required="">
+                                <option *ngFor="let category of categories" value="{{category.key}}">
+                                    {{category.title}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label custom">Extra Ingredients</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <div class="row">
+                                <div class="col-md-11 added-block"
+                                     *ngFor="let extra of menuItems.extraOptions; let i = index" [attr.data-index]="i">
+                                    <div class="col-md-5">
+                                        <input class="form-control" type="text" name="name-{{i}}" id="name"
+                                               [(ngModel)]="extra.name" placeholder="Extra Ingredients Name"/>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input class="form-control" type="text" name="selected-{{i}}" id="selected"
+                                               [(ngModel)]="extra.selected" placeholder="Extra Ingredients Price"/>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-danger" type="button" (click)="removeChoice()">
+                                            <em class="fa fa-trash"></em>
+                                        </button>
+                                    </div>
+                                </div><!--col-->
+                                <div class="col-md-1 added-block">
+                                    <button class="btn btn-sm btn-info" type="button" (click)="addNewChoice()">
+                                        <em class="fa fa-plus"></em>
+                                    </button>
+                                </div>
+                            </div><!--row-->
+
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Price *</label>
+                <div class="col-sm-10">
+                    <div class="panel">
+                        <div class="panel-body mh0">
+                            <div class="row">
+                                <div class="col-md-11 added-block" *ngFor="let choice of menuItems.price; let i = index"
+                                     [attr.data-index]="i">
+                                    <div class="col-md-5">
+                                        <input class="form-control" type="text" name="pname-{{i}}" id="pname" required="" 
+                                               [(ngModel)]="choice.pname" placeholder="Product Variance (size)"/>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input class="form-control" type="text" name="value-{{i}}" id="value" required="" 
+                                               [(ngModel)]="choice.value" placeholder="Product Price">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-danger" type="button" (click)="removePrice()">
+                                            <em class="fa fa-trash"></em>
+                                        </button>
+                                    </div>
+                                </div><!--col-->
+                                <div class="col-md-1 added-block">
+                                    <button class="btn btn-sm btn-info" type="button" (click)="addNewPrice()">
+                                        <em class="fa fa-plus"></em>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="col-sm-2 control-label custom">Thumb</label>
+                <div class="col-sm-10">
+                    <div class="row panel">
+                        <div class="col-md-4">
+                            <div class="panel-body mh0 fileUpload btn btn-primary choose-btn">
+                                <span> <i class="fa fa-upload" aria-hidden="true"></i> &nbsp; Upload</span>
+                                <input type="file" class="upload" ng2FileSelect [uploader]="uploader" accept="image/*" required="" 
+                                       (change)="readUrl($event)">
+                            </div>
+                        </div><!--col-->
+                        <div class="col-md-6" [hidden]="url ==''">
+                            <img class="media-object img-thumbnail thumb96" [src]="url" alt="Image"/>
+                        </div><!--COL-->
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <button class="btn btn-danger pull-right s-n-btn" (click)="cancel()">Cancel</button>
+                    <button class="btn btn-primary pull-right s-n-btn" [disabled]='!f.valid' type="submit">Submit</button>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>

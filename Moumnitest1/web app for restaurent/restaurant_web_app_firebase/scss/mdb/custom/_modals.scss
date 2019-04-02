@@ -1,0 +1,160 @@
+
+// edit address modal commmon in account and checkout page
+.edit-address-modal{
+	.modal-content{
+		border-radius: 4px;
+	}
+	.modal-body{
+		height: 28rem;
+	    overflow-x: hidden;
+	    overflow-y: auto;
+	}
+	.modal-header{
+		padding: 10px 33px;
+		background: $white-a;
+		color: $primary;
+		    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+		h6{font-weight: 500;}
+	}
+	.btn{
+		box-shadow: none;
+    	border-radius: 4px;
+    	padding: 10px 2rem;
+    	margin: 8px 14px;
+	}
+	.md-form{
+		margin-bottom: 15px;
+		input {
+	    	padding-bottom: 0rem;
+    		padding-top: 0.4rem;
+    		}
+		label{
+			margin-left: 26px!important;
+    		font-weight: 400;
+    		color: $black-c;
+    		-webkit-transform: translateY(-86%);
+			transform: translateY(-86%);
+			font-size: 0.7rem;
+		}
+		label.active{
+			color: $primary!important;
+		}
+		.form-control,.md-textarea{
+			border: 1px solid $white-c;
+			text-indent: 10px;
+			border-radius: 4px;
+			margin: 0;
+			background: $white;
+			&:focus{
+			border-color: $primary;
+			box-shadow: none;
+			}
+		}
+	} //md-form
+}//edit adddress modal-end
+.review-modal{
+	@extend .edit-address-modal;
+	.md-form label {
+    margin-left: 8px !important;
+    -webkit-transform: translateY(-194%);
+    transform: translateY(-194%);
+    font-size: 14px;
+    font-weight: 500;
+    }
+   	.modal-body {height: auto;}
+    .modal-header {padding: 10px 16px;}
+    .review-rating{
+    	.title{
+				color: $black-c;
+				font-weight:  500;
+				font-size: 14px;
+				 margin: 0 0 0 4px;
+		}
+			.rating{
+				font-size: 12px;
+				margin: 4px 3px;
+				margin-bottom: 2rem;
+				cursor: pointer;
+				li{
+					
+					font-size: 18px;
+    				padding-right: 1px;
+    				transition: all .1s ease;
+    				color: $primary;
+    				cursor: pointer;
+				}
+			}
+			.rating:hover li { color: $rating-color; }
+			.rating li:hover,
+			.rating li:hover ~ li { color: $primary; }
+    }
+}// review modal end
+.order-details-modal{
+	.modal-body {height: auto;}
+	.modal-title{
+		font-size: 14px;
+		font-weight: 500;
+		color: $black-d;
+		text-transform: uppercase;
+		span{color: $primary;}
+	}
+	.order-details{
+		.order-header{
+			font-size: 14px;
+		    font-weight: 400;
+		    color: $black-b;
+		     padding: 4px 8px;
+		     background-color: $white-b;
+		     border-radius: 2px;
+		    .fa{
+				color: $primary;
+				margin-right: 4px;
+			}
+		}//order-header
+		.wrapper{
+			border: 1px solid $white-b;
+		}
+		.item-header{
+			border-bottom: 1px solid $white-b;
+		}
+		.row.item{
+			border-bottom: 1px solid $white-b;
+    		padding-bottom: 7px;
+		}
+
+		label{
+			font-weight: 400;
+			font-size: 14px;
+			color: $black-b;
+		}
+		a{
+			font-size: 13px;
+    		font-weight: 500;
+    		color: $primary;
+    		
+		}
+		.price{
+			font-weight: 400;
+		    font-size: 14px;
+		    margin: 0;
+		    color: $black-c;
+		}
+		.total{
+			font-weight: 500;
+    		font-size: 14px;
+		}
+	}//order-details
+	.payment-details{
+		@extend .order-details;
+		.payment-method{
+			color: $primary;
+			font-size: 14px;
+			font-weight: 500;
+		}
+		address{
+			font-size: 13px;
+    		font-weight: 400;
+		}
+	}
+}

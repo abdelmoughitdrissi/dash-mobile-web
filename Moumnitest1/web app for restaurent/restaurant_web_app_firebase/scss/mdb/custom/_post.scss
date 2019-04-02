@@ -1,0 +1,113 @@
+.post-content{
+  .section-heading{
+    margin: 2rem 0 3.2rem!important;
+  }
+  .post{
+    border-bottom: 1px solid $white-b;
+    margin-bottom: 2.8rem;
+    padding-bottom: 1.7rem;
+    img{
+      width: 86%;
+      margin: auto;
+    }
+    .date{
+      padding-right: 25px;
+      font-size: 13px;
+      font-weight: 500;
+      color: $black-d;
+    }
+    h4{
+      color: $black-b;
+    }
+  } //post
+  .post-details{
+    .card{
+      .view img{
+        width: 100%;
+        height: 30rem;
+      }
+      .card-body{
+        h3{
+          font-weight: 500;
+          color: $black-c;
+        }
+        p{
+          strong{color: $gray;}
+          span{
+            color: $black-c;
+            font-weight: 500;
+            color: 13px;
+          }
+          margin-bottom: 0;
+        }//p
+      }
+    }//card
+  .excerpt p{
+      font-size: 17px;
+      color: $black-c;
+    }
+    .social-share{
+      h6{
+        font-weight: 500;
+        color: $black-d;
+
+      }
+      a{
+        font-size: 20px;
+        margin-right: 8px;
+      }
+      .fb-ic{color:$facebok-color;}
+      .tw-ic{color:$twitter-color;}
+      .gplus-ic{color:$google-plus-color;}
+      .li-ic{color:$linkedin-color;}
+      .ins-ic{color:$instagram-color;}
+      .pin-ic{color:$pinterest-color;}
+
+    }
+  }//post-details
+  .comments-list{
+    .section-heading h4{
+    font-weight: 600;
+    color: $gray;
+    }
+    .list-item{
+      margin-bottom: 1.3rem;
+      img{
+        width: 94px;
+        height: 94px;
+        border-radius: 50%;
+      }
+      .user-name{
+        font-weight: 600;
+        color: $black-c!important;
+      }
+      .comment-date{
+        font-weight: 500;
+        color: $black-c;
+        font-size: 15px;
+      }
+      .comment-text{
+        @extend .comment-date;
+        font-weight: 400;
+        margin-top: 6px;
+      }
+    }
+  } //comments-list
+  @media (max-width: 575px) {
+      .post img{
+        width: 100%;
+      }
+      .post-details .card .view img{
+        height: 15rem;
+      }
+      .card.card-cascade.wider .card-body{
+        margin: 0;
+        margin-top: -1rem;
+        padding: 18px;
+      }
+      .comments-list .list-item{
+        text-align: center;
+      }
+  }
+
+}

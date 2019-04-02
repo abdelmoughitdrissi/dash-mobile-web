@@ -1,0 +1,158 @@
+body,html{
+	height: 100%;
+	@include scrollBar;
+}
+select{
+	display: block!important;
+}
+.btn,a{
+	cursor: pointer;
+}
+.btn-main{
+	background: $primary!important;
+}
+	// common section header
+	.section-header{
+		text-align: center;
+		margin: 1rem 0 1.6rem;
+		.bottom-border{
+			span{
+				display: inline-block;
+				border-top: 1px solid  $gray-lighter;
+			    height: 3px;
+			    margin: 0 4px;
+			    width: 48px;
+			}
+			img{
+				width: 17px!important;
+				height: 17px!important;
+			}
+		}
+		.sub-title{
+			margin-top: 10px;
+			padding: 0 1rem;
+		}
+	} //section-header
+// breacrumb
+.breadcrumb-wrap{
+		height: 17rem;
+		width: 100%;
+		position: relative;
+		z-index: -1;
+		margin-top: -63px;
+		.bg-img{
+			position: absolute;
+		    top: 0;
+		    right: 0;
+		    height: 100%;
+		    width: 100%;
+		}
+		.overlay-bg{
+			@extend .bg-img;
+			background: rgba(0,0,0,0.5);
+		}
+		.overlay-content{
+			position: absolute;
+		    text-align: center;
+		    width: 100%;
+		    top: 50%;
+		    color: $white;
+		    text-transform: uppercase;
+			h6{
+				letter-spacing: 1px;
+    			font-weight: 400;
+    			color: $white;
+			}
+			h1{
+				font-weight: 700;
+			    font-size: 42px;
+			    letter-spacing: 1px;
+			}
+		} //overlay-content
+		@media only screen and (max-width: 576px) {
+				.overlay-content h1 {
+					font-size: 32px;
+				}
+				.overlay-content h6{
+					font-size: 14px;
+				}
+		}
+} //breadcrumb-wrap-end
+// pagination
+.pagination{
+	margin: 2rem 0;
+	.page-link{
+		border: 1px solid $white-d;
+		margin: 0 10px;
+		color: $black-c;
+		font-weight: 500;
+	}
+	.page-item.active .page-link,.page-link:hover,:active,:focus{
+		background: transparent;
+		border-color: $primary;
+		color: $primary;
+	}
+	.page-item:first-child .page-link,
+	.page-item:last-child .page-link{
+		border-radius: 0;
+	}
+}
+	.empty-message{
+			 text-align: center;
+			margin: 0 auto;
+			min-height: 14rem;
+			padding-top: 2rem;
+			.fa{
+				color: $primary;
+			}
+			h5{
+				font-weight: 500;
+				color: $black-c;
+				letter-spacing: 1px;
+			}
+	}
+/*---radio button style---*/
+// after radio check
+[type="radio"].with-gap:checked + label:before{
+	border-color: $primary;
+}
+[type="radio"]:checked + label:after{
+	border-color: $primary;
+	background-color: $primary;
+}
+.swal2-select{
+	display: none !important;
+}
+//date and time picker styling
+.picker__date-display{
+	background-color: $primary;
+	.btn-floating.btn-flat{
+		background-color: $primary!important;
+		opacity: .8;
+	}
+	.btn-floating.btn-flat.active{
+		background-color: $primary!important;
+		opacity: 1;
+
+	}
+}
+//ng-rating style
+.rating{
+	font-size: 10px!important;
+	span{
+		padding: 0 2px;
+		&:first-child{
+			padding-left: 0!important;
+		}
+		.star-icon{
+			font-size: 1.6em;
+		}
+	}
+}
+//ng-pagination
+.ngx-pagination{
+  font-size: 15px!important;
+  .current{
+    background: $primary!important;
+  }
+}

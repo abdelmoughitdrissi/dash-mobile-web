@@ -1,0 +1,118 @@
+<div class="breadcrumb-wrap">
+  <img src="assets/img/chekout-bg.png" class="bg-img">
+  <div class="overlay-bg"></div>
+
+  <div class="overlay-content">
+    <h1>Contact Us</h1>
+    <!-- <h6>Current order and order history...</h6> -->
+  </div>
+</div>
+
+<!-- container -->
+<div class="container">
+  <br>
+  <!--Section: Contact -->
+  <section class="section contact-us">
+
+    <!--Section heading-->
+    <h2 class="section-heading h1 pt-4 text-center">Feel Free To Contact Us</h2>
+    <br>
+    <!--Section description-->
+    <p class="section-description grey-text">We love our customer and always ready to consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate
+      esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam. Quia, minima?</p>
+    <br>
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-md-8 col-xl-9 mb-5">
+        <form>
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-6">
+              <div class="md-form">
+                <div class="md-form">
+                  <input mdbActive type="text" id="contact-name" class="form-control" ngModel name="name" #name="ngModel">
+                  <label for="contact-name" class="">Your name</label>
+                </div>
+              </div>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6">
+              <div class="md-form">
+                <div class="md-form">
+                  <input mdbActive type="text" id="contact-email" class="form-control" ngModel name="email" #email="ngModel">
+                  <label for="contact-email" class="">Your email</label>
+                </div>
+              </div>
+            </div>
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+
+          <!--Grid row-->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="md-form">
+                <input mdbActive type="text" id="contact-Subject" class="form-control" ngModel name="subject" #subject="ngModel">
+                <label for="contact-Subject" class="">Subject</label>
+              </div>
+            </div>
+          </div>
+          <!--Grid row-->
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-12">
+
+              <div class="md-form">
+                <textarea mdbActive type="text" id="contact-message" class="md-textarea" ngModel name="message" #message="ngModel"></textarea>
+                <label for="contact-message">Your message</label>
+              </div>
+
+            </div>
+          </div>
+          <!--Grid row-->
+
+        </form>
+
+        <div class="center-on-small-only">
+          <a class="btn btn-success waves-light" mdbRippleRadius (click)="sendContact(name,email,subject,message)">Send</a>
+        </div>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-4 col-xl-3">
+        <div class="contact-info text-center">
+          <div>
+            <i class="fa fa-map-marker fa-2x"></i>
+            <p> #1332 Jp Nagar, Bengaluru, India</p>
+          </div>
+
+          <div>
+            <i class="fa fa-phone fa-2x"></i>
+            <p>+ 01 234 567 89</p>
+          </div>
+
+          <div>
+            <i class="fa fa-envelope fa-2x"></i>
+            <p>contact@pietechsolution.com</p>
+          </div>
+        </div>
+      </div>
+      <!--Grid column-->
+
+    </div>
+
+  </section>
+  <!--Section: Contact-->
+  <br>
+</div>

@@ -1,0 +1,226 @@
+   mobil 				dashbord
+  
+ajouter la list est voir si  dn       | 1-afficher region address dans dashbord 
+				      |
+				      | changer dans les dashbord la Method De Livraison	al case region  <td>{{orders.shippingAddress.city}}</td>
+          
+				      |
+ il s'aoujte dans base de donneé dn   | 2-requette de base de donnée qui affiche just la					region donnée 
+  est si il s'afiche dans dashbord dn |
+
+  
+
+Hi Hi 
+
+there
+ok iwill show you the code and the issue
+
+1 this is the mobile app 
+
+when i choose the region exampl califoria i want dash bord show me just california 
+
+did I got it,
+are we able to speak? I cant get a hold i hear you but do you hear me ? No
+I dont
+i think there is problem buy my said is it ok if we keep talking buy tyPING ?
+We would speed up things,
+Are you familiar with filter and reduce functions?
+not alot i need first that you andestand the conseption
+
+this is restaurant porject and it will be mulipel dashbord sow 
+i dont want that all the dashbord show all the commands i want each dashbord show a region ?
+yes i hear you but i
+
+yes 
+
+yes  
+
+
+and each dashbord will show a city 
+
+the dashbord of califoria will show just 
+
+caus thers is 10 stores 
+
+10 defferents places 
+
+there is a droppdawn menu  
+
+but if you see 
+
+if just one dashbord receive lot of city the employee will be lost 
+caus they will receive nother places orders ! code ok 
+
+
+there are two compo.. 
+one for the view  : invoices 
+
+and one for all the orders yes 
+
+YOU CAN CANTROLL THE MOUSE SIR :) ok 
+
+data 
+
+fire base
+
+
+
+ok the problem that i found is the region is inside the view page not the orders 
+
+ok 
+
+th
+an
+k
+
+
+
+const raw = {
+  item1: { key: 'sdfd', value:'sdfd' },
+  item2: { key: 'sdfd', value:'sdfd' },
+  item3: { key: 'sdfd', value:'sdfd' }
+};
+
+const allowed = ['item1', 'item3'];
+
+const filtered = Object.keys(raw)
+  .filter(key => allowed.includes(key))
+  .reduce((obj, key) => {
+    obj[key] = raw[key];
+    return obj;
+  }, {});
+
+console.log(filtered);
+
+ok but okk its an array like json form yes ok 
+rollback 
+or callback
+mm no 
+
+
+
+
+code?
+
+YES i anderstand how the callback work 
+
+what im fraid is if i bring the data
+and put it inside the array that they will b ok ok
+i got it
+
+yes we will filtered with the city the i want :) 
+ok 
+
+yes plz 
+
+yes firebase is more that good caus they using realtime 
+DID WE SHOULD TO ADD LIBRARY , IN UP 
+
+yes the idea that i think about is 
+i mulitpel the dashbord now 
+i have 4 dashbord 
+
+and inside each dashbord i will use a  code  that 
+yes 
+its small ?OK no i already compile it deploy it and its work fast
+
+did you
+
+what is it ?
+
+
+when i multip the dashbord it work two fast even with 10 dashbord
+
+the problem is filtering 
+ok do you search for somethink 
+
+
+
+
+
+
+
+
+
+
+
+  ngOnInit(){
+    const region = 'rabat';
+     
+    const neworderobject = Object.keys(region).filter(key=> )
+
+  }
+
+ implements OnInit 
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+Hi
+
+
+
+Show me the problem?
+                            
+
+
+     rahul                   tom                        alice
+ california         |      NY                   |      LA 
+   DASHBORD              DASHBORD                  DASHBORD
+      |                    |                            |
+       --------------------------------------------------
+                           |
+			firebase 
+   califoria              NY                          LA 
+     orders             orders                       orders 
+
+
+
+
+he
+
+
+paypal
+
+ 
+
+
+
+
+
+
+ API WAS EXPIRED 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

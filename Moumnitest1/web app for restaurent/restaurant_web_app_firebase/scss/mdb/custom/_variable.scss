@@ -1,0 +1,64 @@
+
+    // custom color variables
+
+    $primary: #3bc157;
+    $footer-bg:#242424;
+    $gray			: 	#555;
+    $gray-light		: 	lighten($gray, 25%);
+    $gray-lighter	: 	lighten($gray, 35%);
+
+    $white: #FFFFFF;
+    $white-a: darken($white, 3%);
+    $white-b: darken($white, 6%);
+    $white-c: darken($white, 12%);
+    $white-d: darken($white, 24%);
+
+    $black: rgba(#000000, 1);
+    $black-a: lighten($black, 10%);
+    $black-b: lighten($black, 20%);
+    $black-c: lighten($black, 40%);
+    $black-d: lighten($black, 60%);
+
+		$rating-color					: #f9ab04;
+		$facebok-color					:#3B5998!important;
+		$twitter-color				:#55ACEE!important;
+		$google-plus-color   	:#DD4B39!important;
+		$linkedin-color				:#DD4B39!important;
+		$instagram-color      :#2E5E86!important;
+		$pinterest-color			:#C61118!important;
+    // MIXIN
+
+
+        @mixin placeholder-color($color){
+            &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                color: $color;
+            }
+            &::-moz-placeholder { /* Firefox 19+ */
+              color: $color;
+            }
+            &:-ms-input-placeholder { /* IE 10+ */
+              color: $color;
+            }
+            &:-moz-placeholder { /* Firefox 18- */
+              color: $color;
+            }
+    }
+/*Scroll bar styling*/
+@mixin scrollBar{
+  &::-webkit-scrollbar{
+    width:10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius:10px;
+    box-shadow:  inset 2px -19px 93px -8px $primary;
+    }
+ }
+ @mixin scrollBarThin{
+  &::-webkit-scrollbar{
+    width:5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius:8px;
+    box-shadow:  inset 2px -19px 93px -8px $primary;
+    }
+ }

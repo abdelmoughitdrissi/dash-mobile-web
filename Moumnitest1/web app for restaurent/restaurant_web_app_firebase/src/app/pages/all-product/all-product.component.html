@@ -1,0 +1,103 @@
+<div class="breadcrumb-wrap">
+  <img src="assets/img/breadcrumbbg.jpg" class="bg-img">
+  <div class="overlay-bg"></div>
+
+  <div class="overlay-content">
+    <h1>All products...</h1>
+    <h6>Hello there, you'll find here what you really want to taste..</h6>
+  </div>
+</div>
+<section class="all-product">
+  <!--loader -->
+  <div class="preloader-wrap waiting" *ngIf="loading === 0 ">
+    <div class="loader waiting product">
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+    </div>
+  </div>
+  <!-- loader -->
+  <!-- no data found -->
+  <div class="empty-message" *ngIf="loading === 2 ">
+    <i class="fa fa-5x fa-frown-o" aria-hidden="true"></i>
+    <h5>
+      <br>Sorry
+      <br>
+      <br> Food Item is not available in this menu. </h5>
+  </div>
+  <!-- No data found end -->
+  <!-- container -->
+  <div class="container" *ngIf="loading === 1 ">
+    <div class="row header">
+      <div class="col-md-6 pt-2">
+        <p>Showing page {{p}}</p>
+      </div>
+      <div class="col-md-6">
+        <div class="search-wrapper">
+          <input type="text" autofocus="" class="" placeholder="search" (keyup)="searchProducts($event)">
+          <a dropdownToggle ripple-radius type="button" class="link" (click)="search()">
+            <i class="fa fa-search"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-3" *ngFor="let item of allItems | paginate: { itemsPerPage: 8, currentPage : p, totalItems: allItems.length }">
+        <div class="card">
+          <div class="view overlay hm-black-light">
+            <img class="img-fluid" src="{{item.thumb}}" alt="image">
+            <a (click)="viewItem(item._id) ">
+              <div class="mask"></div>
+            </a>
+            <button class="btn" (click)="viewItem(item._id) ">View</button>
+          </div>
+          <div class="offer" *ngIf="item.discount > 0 ">-{{item.discount}}%</div>
+
+          <div class="card-body text-center">
+            <h6 class="title">{{item.title}}</h6>
+            <!--Rating-->
+            <div>
+              <!--  *ngIf="item.noOfRating > 0 " -->
+              <rating name="ratingReview" [(ngModel)]="item.rating" [max]="maxRat" [readonly]="isReadonly" [float]="true" stateOn="fa fa-star text-yellow"
+                stateOff="fa fa-star-o">
+              </rating>
+              <span *ngIf="item.noOfRating > 0">({{item.noOfRating}})</span>
+            </div>
+            <p class="price">
+              <span *ngIf="item.price[0].specialPrice === undefined; else elseBlock">{{currency}}{{item.price[0].value}}</span>
+            </p>
+            <ng-template #elseBlock>
+              <p class="price">
+                <span class="discount" *ngIf="item.price[0].value != item.price[0].specialPrice"> {{currency}}{{item.price[0].value}}
+                </span>
+                {{currency}} {{item.price[0].specialPrice | number}} </p>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <!-- col-end -->
+      <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls>         -->
+    </div>
+    <!-- row-end -->
+    <!-- pagination -->
+    <div class="row">
+      <div class="col-md-12">
+        <nav>
+          <ul class="pagination float-md-right">
+            <li class="page-item">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- pagination end -->
+
+  </div>
+  <!-- container-end -->
+</section>
+<!---allproduct-section-end -->

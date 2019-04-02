@@ -1,0 +1,51 @@
+<div class="content-heading"> Modifier Devise
+  <small>
+    <a [routerLink]=" ['/home'] ">Acceuil</a> ->
+    <a [routerLink]="['/currencies/all']"> Devise </a>-> Modifier Devise
+  </small>
+</div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <!-- START panel-->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong>Modifier</strong> Devise</div>
+      <div class="panel-body">
+        <form (ngSubmit)="onUpdateCurrency(f)" #f="ngForm">
+          <div class="row coustom-row">
+            <div class="col-md-2">
+              <label>Tag Nom*</label>
+            </div>
+            <div class="col-md-10">
+              <input class="form-control" type="text" placeholder="Name" name="currency" id="currency" [(ngModel)]="currency.currencyName"
+                required="true" />
+            </div>
+          </div>
+          <br>
+          <div class="row coustom-row">
+            <div class="col-md-2">
+              <label>Tag Nom*</label>
+            </div>
+            <div class="col-md-10">
+              <input class="form-control" type="text" placeholder="Symbol" name="symbol" id="symbol" [(ngModel)]="currency.currencySign.symbol"
+                required="true" />
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <div class="col-md-12">
+              <div class="col-md-2"></div>
+              <div class="col-md-10 text-right">
+                <button class="btn btn-info coustom-save-btn" type="submit" [disabled]="!f.valid">Modifier
+                </button>&nbsp;&nbsp;
+                <button class="btn btn-danger s-n-btn" (click)="cancel()">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- END panel-->
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<section class="form-wrapper">
+  <img src="assets/img/login.png" class="bg-img">
+  <div class="bg-overlay"></div>
+  <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+    <div class="form-content">
+      <img src="assets/img/logo.png">
+      <p class="title">welcome to restraurant app</p>
+
+      <div class="form-group">
+        <label for="username">Email</label>
+        <input type="email" class="form-control" formControlName="email" name="email" id="email">
+        <div class="error-msg" *ngIf="signinForm.controls['email'].hasError('required') && signinForm.controls['email'].touched">
+          Please Enter Email
+        </div>
+        <div class="error-msg" *ngIf="signinForm.controls['email'].hasError('pattern') && signinForm.controls['email'].touched">
+          Please Enter a valid Email
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" formControlName="password" name="password" id="password">
+        <div class="error-msg" *ngIf="signinForm.controls['password'].hasError('required') && signinForm.controls['password'].touched">
+          Please Enter password
+        </div>
+        <div class="error-msg" *ngIf="signinForm.controls['password'].hasError('minlength') && signinForm.controls['password'].touched">
+          password can not less then 6 characters
+        </div>
+        <div class="error-msg" *ngIf="signinForm.controls['password'].hasError('maxlength') && signinForm.controls['password'].touched">
+          password can not exceed 15 characters
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="checkbox6" [(ngModel)]="rememberMe" name="account_remember" [ngModelOptions]="{standalone: true}">
+        <label for="checkbox6" class="check">Remember me ?</label>
+        <a class="forget-pass" [routerLink]="['/forgetPass']">Forget password ?</a>
+      </div>
+      <button class="btn btn-submit btn-block" type="submit" [disabled]="!signinForm.valid">login</button>
+
+      <p class="or">
+        <span></span>OR
+        <span></span>
+      </p>
+
+      <button class="btn btn-info btn-block" [routerLink]="['/signup']">CREATE ACCOUNT</button>
+    </div>
+  </form>
+</section>

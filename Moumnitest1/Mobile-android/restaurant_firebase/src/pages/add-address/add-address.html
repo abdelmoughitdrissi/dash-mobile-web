@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{"Add Address" | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+
+    <ion-list class="adress-line">
+        <form (ngSubmit)="addAddress(f)" #f="ngForm">
+            <ion-label class="add-heading">
+                <ion-icon ios="ios-home" md="md-home"></ion-icon>
+                &nbsp;&nbsp; {{"Entrer Address" | translate}}
+            </ion-label>
+            <ion-row class="full-address">
+                <ion-item class="sub-address">
+                    <ion-input type="text" placeholder="{{'Nom Compelt' | translate}}" name="name" id="name" [(ngModel)]="address.name" required></ion-input>
+                </ion-item>
+               
+
+
+
+                <ion-item class="sub-address">
+                    <ion-input type="number" name="mobileNo" id="Votre Numero de télefone" [(ngModel)]="address.mobileNo" placeholder="{{'Mobile' | translate}}"></ion-input>
+                </ion-item>
+
+
+
+               <!-- <ion-item class="sub-address">
+                    <ion-input type="number" placeholder="{{'20070' | translate}}" name="pincode" id="pincode" [(ngModel)]="address.pincode"
+                        required></ion-input>
+                </ion-item> -->
+
+
+ 
+
+
+                <ion-item>
+                    
+                     <ion-select item-left  name="countrycode"  placeholder="{{'region' | translate}}" name="city" id="city" [(ngModel)]="address.city" required >
+                        <ion-option >Maârif </ion-option>
+                        <ion-option >Ain Diab</ion-option>
+                        <ion-option >Randy    </ion-option>
+                        <ion-option >derb ghalef  </ion-option>
+                        <ion-option >california </ion-option>
+                        <ion-option >Lambarkiyine</ion-option>
+                    </ion-select>
+                    
+               </ion-item>
+
+
+
+
+
+
+
+
+
+                <ion-item class="sub-address address-textarea">
+                    <ion-textarea rows="6" placeholder="{{'S.V.P Remplis Votre  Address' | translate}}" name="address" id="address" [(ngModel)]="address.address"
+                        required></ion-textarea>
+                </ion-item>
+            </ion-row>
+            <button class="checkOut-btn" ion-button block type="submit" [disabled]="!f.valid">
+                <ion-icon ios="ios-add" md="md-add"></ion-icon>
+                &nbsp;&nbsp;{{"Add Address" | translate}}
+            </button>
+        </form>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,290 @@
+// Navbars pro
+.navbar {
+  .nav-item {
+    &.avatar {
+      padding: 0;
+      &.active {
+        background-color: transparent!important;
+      }
+      .dropdown-toggle {
+        padding: 0;
+        img {
+          height: $navbar-avatar-height;
+        }
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.double-nav {
+  z-index: 100;
+  color: $white;
+  @media (max-width: $medium-screen) {
+    padding-top: $navbar-double-small-padding;
+    padding-bottom: $navbar-double-small-padding;
+  }
+  .container {
+    @media (max-width: 768px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  a {
+    color: $white;
+    font-size: $navbar-double-font-size;
+  }
+  .breadcrumb-dn {
+    // margin-top: $navbar-double-small-padding;
+    p {
+      margin: 0;
+      padding-top: 0;
+      padding-left: $navbar-breadcrumb-dn-padding;
+    }
+    @media (max-width: 993px) {
+      display: none;
+    }
+  }
+  .button-collapse {
+    position: absolute; // top: $navbar-button-collapse-top;
+    left: $navbar-button-collapse-left;
+    font-size: $navbar-button-collapse-font-size;
+    @media (min-width: $sidenav-breakpoint) {
+      display: none;
+    }
+    @media all and (max-width: 599px) {
+      margin-top: -6px;
+    }
+    @media (max-width: $sidenav-breakpoint) {
+      display: block;
+      position: absolute;
+      left: 10px;
+      top: 15px;
+      font-size: $navbar-button-collapse-fs-sm; // margin-top: $navbar-button-collapse-mt;
+      margin-right: $navbar-button-collapse-mx;
+      margin-left: $navbar-button-collapse-mx;
+    }
+    @media all and (min-width: 600px) and (max-width: 993px) {
+      position: absolute;
+      top: 10px;
+    }
+  }
+  .button-collapse-non-fixed {
+    position: absolute; // top: $navbar-button-collapse-top;
+    left: $navbar-button-collapse-left;
+    font-size: $navbar-button-collapse-font-size;
+    @media (min-width: $sidenav-breakpoint) {
+      display: none;
+    }
+    @media all and (max-width: 599px) {
+      margin-top: -6px;
+    }
+    @media (max-width: $sidenav-breakpoint) {
+      display: block;
+      position: absolute;
+      left: 10px;
+      top: 15px;
+      font-size: $navbar-button-collapse-fs-sm; // margin-top: $navbar-button-collapse-mt;
+      margin-right: $navbar-button-collapse-mx;
+      margin-left: $navbar-button-collapse-mx;
+    }
+    @media all and (min-width: 600px) and (max-width: 993px) {
+      position: absolute;
+      top: 10px;
+    }
+  }
+  .hidden-nav {
+    display: block;
+    position: absolute;
+    top: 13px;
+    left: $navbar-button-collapse-left;
+    font-size: $navbar-button-collapse-font-size;
+    margin-left: $navbar-button-collapse-mx;
+  } //material dropdown
+  .dropdown {
+    .dropdown-menu {
+      margin-left: -68px;
+      display: none;
+      position: absolute;
+      transform: translate3d(6px, 49px, 0px);
+      top: 0px;
+      left: 0px;
+      will-change: transform;
+    }
+  } // Fix for double nav ONLY IE10+
+  @media all and (-ms-high-contrast: none),
+  (-ms-high-contrast: active) {
+    .ie-double-nav {
+      position: absolute;
+      top: 5px;
+      right: 0;
+    }
+    .button-collapse {
+      height: 25px;
+    }
+    .hidden-nav-button-collapse i {
+      position: absolute;
+      top: 0 !important;
+      margin-top: -4px !important;
+    }
+    @media all and (max-width: 599px) {
+      .ie-double-nav {
+        top: 3px;
+      }
+      .nav-link {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .hidden-nav-button-collapse i {
+        top: 7px !important;
+      }
+      .button-collapse,
+      .button-collapse-non-fixed {
+        top: 5px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+    @media all and (min-width: 600px) and (max-width: 992px) {
+      .button-collapse-non-fixed {
+        top: 5px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .button-collapse {
+        top: 6px !important;
+      }
+    }
+    @media all and (min-width: 993px) and (max-width: 1441px) {
+      .breadcrumbs {
+        margin-left: 20px;
+        margin-top: -2px;
+      }
+      .button-collapse,
+      .button-collapse-non-fixed {
+        top: 5px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .ie-breadcrumbs {
+        position: absolute;
+      }
+    }
+    @media all and (min-width: 1441px) {
+      .breadcrumbs {
+        margin-left: 20px !important;
+        margin-top: 2px !important;
+      }
+      .breadcrumbs-hidden-nav {
+        margin-left: 20px !important;
+        margin-top: 10px !important;
+      }
+      .breadcrumbs-non-fixed {
+        margin-left: 5px !important;
+      }
+      .button-collapse-non-fixed {
+        display: block;
+        top: 6px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .hidden-nav-button-collapse i {
+        top: 0 !important;
+        margin-top: -25px !important;
+      }
+      .ie-hidden-double-nav {
+        position: absolute;
+        top: 15px !important;
+        right: 0;
+      }
+    }
+  } //Fix for double nav only for Edge
+  @supports (-ms-ime-align: auto) {
+    .ie-double-nav {
+      position: absolute;
+      top: 5px;
+      right: 0;
+    }
+    .button-collapse {
+      height: 25px;
+    }
+    .hidden-nav-button-collapse i {
+      position: absolute;
+      top: 0 !important;
+      margin-top: -4px !important;
+    }
+    @media all and (max-width: 599px) {
+      .ie-double-nav {
+        top: 3px;
+      }
+      .nav-link {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .hidden-nav-button-collapse i {
+        top: 7px !important;
+      }
+      .button-collapse,
+      .button-collapse-non-fixed {
+        top: 5px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+    }
+    @media all and (min-width: 600px) and (max-width: 992px) {
+      .button-collapse-non-fixed {
+        top: 5px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .button-collapse {
+        top: 6px !important;
+      }
+    }
+    @media all and (min-width: 993px) and (max-width: 1441px) {
+      .breadcrumbs {
+        margin-left: 20px;
+        margin-top: -2px;
+      }
+      .button-collapse,
+      .button-collapse-non-fixed {
+        top: 5px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .ie-breadcrumbs {
+        position: absolute;
+      }
+    }
+    @media all and (min-width: 1441px) {
+      .breadcrumbs {
+        margin-left: 20px !important;
+        margin-top: 2px !important;
+      }
+      .breadcrumbs-hidden-nav {
+        margin-left: 20px !important;
+        margin-top: 10px !important;
+      }
+      .breadcrumbs-non-fixed {
+        margin-left: 5px !important;
+      }
+      .button-collapse-non-fixed {
+        display: block;
+        top: 6px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .hidden-nav-button-collapse i {
+        top: 0 !important;
+        margin-top: -25px !important;
+      }
+      .ie-hidden-double-nav {
+        position: absolute;
+        top: 15px !important;
+        right: 0;
+      }
+    }
+  }
+}

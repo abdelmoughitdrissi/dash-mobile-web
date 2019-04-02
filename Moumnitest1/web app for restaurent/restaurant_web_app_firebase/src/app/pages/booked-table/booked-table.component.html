@@ -1,0 +1,52 @@
+<div class="breadcrumb-wrap">
+	<img src="assets/img/chekout-bg.png" class="bg-img">
+	<div class="overlay-bg"></div>
+
+	<div class="overlay-content">
+		<h1>Booked Table</h1>
+		<!-- <h6>Current order and order history...</h6> -->
+	</div>
+</div>
+
+<!-- container -->
+<div class="container" *ngIf="bookedTable.length > 0; else elseBlock">
+
+	<section class="cart">
+		<div class="table-wrapper">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="b-index"></th>
+							<th class="b-time">Time</th>
+							<th class="b-date">Date</th>
+							<th class="b-person">No of Person</th>
+							<th class="b-status">Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let item of bookedTable">
+							<td></td>
+							<td class="data">{{item.time}}</td>
+							<td class="data">{{item.date|date}}</td>
+							<td class="data">{{item.person}}</td>
+							<td class="data">
+								<span class="badge blue">{{item.status}}</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- table-wrapper -->
+	</section>
+</div>
+<ng-template #elseBlock>
+	<div class="empty-message">
+		<i class="fa fa-5x fa-frown-o" aria-hidden="true"></i>
+		<h5>
+			<br>Sorry
+			<br>
+			<br> No tables booked yet. </h5>
+	</div>
+</ng-template>

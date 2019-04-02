@@ -1,0 +1,336 @@
+<div class="breadcrumb-wrap">
+  <img src="assets/img/chekout-bg.png" class="bg-img">
+  <div class="overlay-bg"></div>
+
+  <div class="overlay-content">
+    <h1>Account</h1>
+    <h6>Edit your User name, Email address and Shipping address.</h6>
+  </div>
+</div>
+
+<div class="acount-content">
+  <div class="container">
+    <div class="acount-content-wrapper">
+
+      <section class="basic-info">
+        <div class="section-title">
+          Account inforamtion
+          <span class="hidden-md-down"></span>
+        </div>
+
+        <div class="row">
+          <label class="col-md-2">User Name:</label>
+          <div class="col-md-10 detail">{{userDetails.name}}</div>
+        </div>
+        <hr>
+        <div class="row">
+          <label class="col-md-2">Email Address:</label>
+          <div class="col-md-10 detail">
+            <p>{{userDetails.email}}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <label class="col-md-2">Mobile No:</label>
+          <div class="col-md-10 detail">
+            <p>{{userDetails.mobileNo}}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6 ">
+            <button class="btn btn-warning" (click)="editInfoShow()">Edit information</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-info float-md-right" (click)="editPasswordShow()">Change Password
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="info-form col-md-6 animated fadeInRight" *ngIf="editInfo">
+            <form (ngSubmit)="onUpdateUserInfo(u)" #u="ngForm">
+              <div class="md-form form-sm">
+                <input type="text" id="name" name="name" class="form-control" [ngModel]="editUserDetails.name" mdbActive required #name="ngModel">
+                <label for="name">User Name</label>
+                <span class="help-block" *ngIf="name?.touched && name?.errors?.required" style="color:red; margin-left:1rem">
+                  <small> Name is required</small>
+                </span>
+              </div>
+              <div class="md-form form-sm">
+                <input type="email" id="email" class="form-control" name="email" [ngModel]="editUserDetails.email" mdbActive required email
+                  #email="ngModel">
+                <label for="email">Email Address</label>
+                <span class="help-block" *ngIf="email?.touched && email?.errors?.required" style="color:red; margin-left:1rem">
+                  <small> Email is required</small>
+                </span>
+
+                <span class="help-block" *ngIf="email?.touched && email?.errors?.email" style="color:red; margin-left:1rem">
+                  <small> Enter valid email</small>
+                </span>
+              </div>
+
+              <div class="md-form form-sm ">
+                <input type="tel" id="phone" class="form-control" name="mobileNo" [ngModel]="editUserDetails.mobileNo" mdbActive minlength="10"
+                  maxlength="10" required #phNum="ngModel">
+                <label for="phone">Phone Number</label>
+                <span class="help-block" *ngIf="phNum?.touched && phNum?.errors?.required" style="color:red; margin-left:1rem">
+                  <small> Phone Number is required</small>
+                </span>
+                <span class="help-block" *ngIf="phNum?.touched && phNum?.errors?.minlength" style="color:red; margin-left:1rem">
+                  <small> Phone Number should have 10 digits</small>
+                </span>
+              </div>
+              <button class="btn btn-save" type="submit" [disabled]="!u.valid">save changes</button>
+
+              <button class="btn btn-flat" mdbRippleRadius (click)="hideForm()">cancel</button>
+            </form>
+          </div>
+          <!-- editinfo-form -->
+          <div class="col-md-6">
+            <!-- for space -->
+          </div>
+          <div class="info-form col-md-6 animated fadeInLeft" *ngIf="editPassword">
+            <form (ngSubmit)="onUpdatePassword(f)" #f="ngForm">
+
+              <div class="md-form form-sm">
+                <input type="email" id="email" class="form-control" name="email" [(ngModel)]="updatePassword.email" mdbActive>
+                <label for="newpass">Username(Email)</label>
+              </div>
+
+              <button class="btn btn-save" type="submit">save changes</button>
+              <button class="btn btn-flat" mdbRippleRadius (click)="hideForm()">cancel</button>
+            </form>
+          </div>
+          <!-- edit password-form -->
+        </div>
+      </section>
+      <!-- basic info end-->
+
+      <section class="address-content">
+        <div class="adddress-wrapper">
+          <div class="section-title">
+            Delivery address
+            <span class="hidden-md-down"></span>
+          </div>
+          <!-- row adress -->
+          <div class="row">
+            <div class="col-md-6" *ngFor="let address of savedAddresses; let i=index ">
+              <!-- radio for address -->
+              <div class="form-group address">
+                <a class="edit-link" (click)="editAddress.show()" (click)="getSingleAddressData(i, address._id )">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a class="delete-link" (click)="deleteAddress(address._id)">
+                  <i class="fa fa-trash"></i>
+                </a>
+                <div class="address-field-wrapper">
+                  <p class="name">{{address.name}}</p>
+                  <p class="phone">{{address.mobileNo}}</p>
+                  <p>{{address.address}},&nbsp;{{address.area}}. {{address.city}}
+                    <br> {{address.pincode}}
+                  </p>
+                </div>
+                <!-- <button class="btn btn-main">Set as primary</button> -->
+              </div>
+            </div>
+            <!-- col-md-4 -->
+            <!-- col-12 radio for new address -->
+            <div class="col-md-12">
+              <div class="form-group address add">
+                <input name="group2" type="radio" class="with-gap" id="addAddress" (click)="addAddressShow()">
+                <label for="addAddress" class="add-addres-label">
+                  <i class="fa fa-plus" aria-hidden="true"></i> add new address
+                </label>
+
+                <div class="address-form animated fadeIn" *ngIf="addAddress">
+                  <form (ngSubmit)="onSaveNewAddress(a)" #a="ngForm">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="name" class="form-control" name="name" [(ngModel)]="newAddress.name" mdbActive required #name="ngModel">
+                          <label for="name">Name</label>
+                          <span class="help-block" *ngIf="name?.touched && name?.errors?.required" style="color:red; margin-left:1rem">
+                            <small> Name is required</small>
+                          </span>
+                        </div>
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="phone" class="form-control" name="mobileNo" [(ngModel)]="newAddress.mobileNo" mdbActive minlength="10"
+                            maxlength="10" required #mobileNo="ngModel">
+                          <label for="phone">Phone Number</label>
+                          <span class="help-block" *ngIf="mobileNo?.touched && mobileNo?.errors?.required" style="color:red; margin-left:1rem">
+                            <small> Phone Number is required</small>
+                          </span>
+                          <span class="help-block" *ngIf="mobileNo?.touched && mobileNo?.errors?.minlength" style="color:red; margin-left:1rem">
+                            <small> Phone Number should have 10 digits</small>
+                          </span>
+                        </div>
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="pincode" class="form-control" name="pincode" [(ngModel)]="newAddress.pincode" mdbActive minlength="6"
+                            maxlength="6" required #pincode="ngModel">
+                          <label for="pincode">Pincode</label>
+                          <span class="help-block" *ngIf="pincode?.touched && pincode?.errors?.required" style="color:red; margin-left:1rem">
+                            <small> Pincode is required</small>
+                          </span>
+                          <span class="help-block" *ngIf="pincode?.touched && pincode?.errors?.minlength" style="color:red; margin-left:1rem">
+                            <small> Pincode should have 6 digits</small>
+                          </span>
+                        </div>
+
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="locality" class="form-control" name="area" [(ngModel)]="newAddress.area" mdbActive required #area="ngModel">
+                          <label for="locality">Area</label>
+                          <span class="help-block" *ngIf="area?.touched && area?.errors?.required" style="color:red; margin-left:1rem">
+                            <small> Area is required</small>
+                          </span>
+                        </div>
+
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="locality" class="form-control" id="apartmentName" name="address" [(ngModel)]="newAddress.address"
+                            mdbActive required #address="ngModel">
+                          <label for="apartmentName">Address</label>
+                          <span class="help-block" *ngIf="address?.touched && address?.errors?.required" style="color:red; margin-left:1rem">
+                            <small> Address is required</small>
+                          </span>
+                        </div>
+
+                        <div class="md-form form-sm col-md-6">
+                          <input type="text" id="city" class="form-control" name="city" [(ngModel)]="newAddress.city" mdbActive required #city="ngModel">
+                          <label for="city">City</label>
+                          <span class="help-block" *ngIf="city?.touched && city?.errors?.required" style="color:red; margin-left:1rem">
+                            <small> City is required</small>
+                          </span>
+                        </div>
+                        <div class="col-md-12 btn-wrapper">
+                          <button class="btn btn-save acount" type="submit" [disabled]="!a.valid">save</button>
+
+                          <button class="btn btn-flat" mdbRippleRadius (click)="hideForm()">
+                            cancel
+                          </button>
+                        </div>
+                      </div>
+                      <!-- row -->
+                    </div>
+                    <!-- container -->
+                  </form>
+                </div>
+                <!-- address-form -->
+              </div>
+            </div>
+            <!-- new adddres readio  -->
+
+          </div>
+          <!-- row addres -->
+        </div>
+        <!--/ address-wrapper -->
+      </section>
+      <!-- address-section -->
+    </div>
+  </div>
+  <!--  container -->
+
+
+  <!-- edit address modal -->
+  <div mdbModal #editAddress="mdb-modal" class="modal edit-address-modal fade" tabindex="-1" role="dialog" aria-labelledby="myeditAddressLabel"
+    aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="editAddress.hide()" #closeUpdateAddressModal>
+            <span aria-hidden="true">×</span>
+          </button>
+          <h6 class="modal-title w-100" id="myModalLabel">Edit Address</h6>
+        </div>
+        <div class="modal-body">
+          <div class="form-group address add">
+
+            <div class="">
+              <form (ngSubmit)="onUpdateAddress(p)" #p="ngForm">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="md-form form-sm col-md-6">
+                      <input type="text" id="nameu" class="form-control" name="name" [ngModel]="updateAddressData.name" mdbActive required #name="ngModel">
+                      <label for="name">Name</label>
+                      <span class="help-block" *ngIf="name?.touched && name?.errors?.required" style="color:red; margin-left:1rem">
+                        <small> Name is required</small>
+                      </span>
+                    </div>
+
+                    <div class="md-form form-sm col-md-6">
+                      <input type="text" id="phoneu" class="form-control" name="mobileNo" [ngModel]="updateAddressData.mobileNo" mdbActive [(ngModel)]="newAddress.mobileNo"
+                        mdbActive minlength="10" maxlength="10" required #mobileNo="ngModel">
+                      <label for="phone">Phone Number</label>
+                      <span class="help-block" *ngIf="mobileNo?.touched && mobileNo?.errors?.required" style="color:red; margin-left:1rem">
+                        <small> Phone Number is required</small>
+                      </span>
+                      <span class="help-block" *ngIf="mobileNo?.touched && mobileNo?.errors?.minlength" style="color:red; margin-left:1rem">
+                        <small> Phone Number should have 10 digits</small>
+                      </span>
+                    </div>
+                    <div class="md-form form-sm col-md-6">
+                      <input type="text" id="pincodeu" class="form-control" name="pincode" [ngModel]="updateAddressData.pincode" mdbActive minlength="6"
+                        maxlength="6" required #pincode="ngModel">
+                      <label for="pincode">Pincode</label>
+                      <span class="help-block" *ngIf="pincode?.touched && pincode?.errors?.required" style="color:red; margin-left:1rem">
+                        <small> Pincode is required</small>
+                      </span>
+                      <span class="help-block" *ngIf="pincode?.touched && pincode?.errors?.minlength" style="color:red; margin-left:1rem">
+                        <small> Pincode should have 6 digits</small>
+                      </span>
+                    </div>
+                    <div class="md-form form-sm col-md-12">
+                      <textarea mdbActive type="text" id="apartmentNameu" name="address" [ngModel]="updateAddressData.address" class="md-textarea"
+                        required #address="ngModel"></textarea>
+                      <label for="address">Address</label>
+                      <span class="help-block" *ngIf="address?.touched && address?.errors?.required" style="color:red; margin-left:1rem">
+                        <small> Address is required</small>
+                      </span>
+                    </div>
+
+                    <div class="md-form form-sm col-md-6">
+                      <input type="text" id="cityu" class="form-control" name="city" [ngModel]="updateAddressData.city" mdbActive required #city="ngModel">
+                      <label for="city">City</label>
+                      <span class="help-block" *ngIf="city?.touched && city?.errors?.required" style="color:red; margin-left:1rem">
+                        <small> City is required</small>
+                      </span>
+                    </div>
+
+                    <div class="md-form form-sm col-md-6">
+                      <input type="text" id="localityu" class="form-control" name="area" [ngModel]="updateAddressData.area" mdbActive required
+                        #area="ngModel">
+                      <label for="locality">Area</label>
+                      <span class="help-block" *ngIf="area?.touched && area?.errors?.required" style="color:red; margin-left:1rem">
+                        <small> Area is required</small>
+                      </span>
+                    </div>
+
+                  </div>
+                  <!-- row -->
+                </div>
+                <!-- container -->
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <button type="button" class="btn btn-elegant  waves-light" aria-label="Close" (click)="editAddress.hide()" mdbRippleRadius>Close
+                    </button>
+                  </div>
+                  <div class="col-md-6 ">
+                    <button type="button" class="btn float-md-right btn-success relative waves-light" type="submit" mdbRippleRadius [disabled]="!p.valid">Save
+                      changes
+                    </button>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+            <!-- address-form -->
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <!-- edit address-modal -->
+
+</div>
+<!-- account-content -->

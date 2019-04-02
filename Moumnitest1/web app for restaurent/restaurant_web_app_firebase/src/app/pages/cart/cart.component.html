@@ -1,0 +1,105 @@
+<div class="breadcrumb-wrap">
+    <img src="assets/img/cart-bg.png" class="bg-img">
+    <div class="overlay-bg"></div>
+
+    <div class="overlay-content">
+        <h1>Shopping Cart</h1>
+        <h6>Select your choice and shop more...</h6>
+    </div>
+</div>
+
+<!-- container -->
+<div class="container">
+    <div class="empty-message" *ngIf="hideCart">
+        <i class="fa fa-5x fa-shopping-basket" aria-hidden="true"></i>
+        <h5><br>Sorry<br><br>Please add some Food Items. </h5>
+    </div>
+    <section class="cart" *ngIf="!hideCart">
+        <div class="table-wrapper">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="img"></th>
+                            <th class="detail"></th>
+                            <th class="qty">Quantity</th>
+                            <th class="price">Price</th>
+                            <th class="total">Total</th>
+                            <th class="remove"></th>
+                            <th class="remove"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- product row -->
+                        <tr *ngFor="let cartItem of cart; let i = index;">
+                            <td>
+                                <img src="{{cartItem.item.thumb}}">
+                            </td>
+                            <td class="product-detail">
+
+                                <a (click)="viewItem(cartItem._id)">{{cartItem.item.title}}</a>
+                                <span class="badge badge-info">In stock</span>
+
+                                <div *ngFor="let data of cartItem.item?.extraOptions; let j=index;">
+                                    <input class="form-check-input" type="checkbox" [checked]="data.selected"
+                                        [(ngModel)]="data.selected" id="{{data.name}}" name="{{data.name}}" (change)="selectExtraIngredient(i,j)">
+                                    <label class="form-check-label" for="{{data.name}}">
+                                        {{data.name}} {{currency}}{{data.value}}
+                                    </label>
+                                </div>
+
+                            </td>
+                            <td class="pt-4">
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-success" (click)="reduceQuantity(i)"><i class="fa fa-minus"></i></button>
+                                    <span>{{cartItem.item.itemQunatity}}</span>
+                                    <button class="btn btn-sm btn-success" (click)="addQuantity(i)"><i class="fa fa-plus"></i></button>
+                                </div>
+
+                            </td>
+                            <td class="pt-4"><span class="price">{{cartItem.item.price.value.toFixed(2)}}</span></td>
+                            <td class="pt-4"><span class="price">{{cartItem.itemTotalPrice.toFixed(2)}}</span></td>
+                            <td class="pt-4">
+                                <button class="btn remove btn-sm btn-flat" data-toggle="tooltip" data-placement="top"
+                                    title="Remove" (click)="OnDelete(i)">
+                                    <i class="fa fa-times-circle red-text" aria-hidden="true"></i>
+                                </button>
+                            </td>
+
+
+
+
+
+                        </tr>
+
+
+
+                        <!-- product-row -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- total amount -->
+            <div class="amount-wrapper row">
+                <div class="col-md-7">
+                    <!-- for empty space -->
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        <label class="col-6">Amount:</label>
+                        <div class="col-6 amount text-right">{{currency}}{{cartTotalAmount}}</div>
+
+                        <label class="col-6">Tax charge:({{tax}}%)</label>
+                        <div class="col-6 amount text-right">+{{taxAmount.toFixed(2)}}</div>
+                        <hr>
+                        <label class="col-6 total">Total Amount:</label>
+                        <div class="col-6 total-amount text-right">{{currency}}{{GrandTotal.toFixed(2)}}</div>
+                    </div>
+                    <button class="btn btn-checkout" (click)="gotoCheckout()">Checkout</button>
+                    <button class="btn btn-warning" [routerLink]="['/products']">continue shopping</button>
+                </div>
+
+
+            </div> <!-- amount-wrapper -->
+        </div> <!-- table-wrapper -->
+    </section>
+</div>

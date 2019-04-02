@@ -1,0 +1,327 @@
+<div class="home-content">
+  <div class="banner">
+    <img src="assets/img/banner.jpg" class="bg-img">
+    <div class="overlay-bg"></div>
+
+    <div class="overlay-content">
+      <h5>Hello, are you ready to start now ?</h5>
+      <h1>Delicate &amp; Gustable</h1>
+      <button class="btn" [routerLink]="['/menu']">
+        Discover menu
+      </button>
+    </div>
+  </div>
+
+  <!-- container -->
+  <div class="container">
+    <section class="booking-wrapper">
+      <!-- row -->
+      <div class="row">
+        <!-- col-6 time and date picker -->
+        <div class="col-sm-6 col-12">
+
+          <div class="row">
+            <div class="col-6 col-select">
+              <div class="form-group">
+                <mdb-time-picker [showClock]="false" [twelvehour]="true" [darktheme]="false" [placeholder]="'Selected time'" [showClock]="true"
+                  [(ngModel)]="bookTable.time"></mdb-time-picker>
+                <i class="fa fa-clock-o"></i>
+              </div>
+            </div>
+
+            <div class="col-6 col-select date">
+              <div class="form-group">
+                <mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Selected date'" [(ngModel)]="bookTable.date"
+                  required #date></mdb-date-picker>
+                <i class="fa fa-calendar-o"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- col-6 -->
+
+        <!-- col-6 selection and buttton-->
+        <div class="col-sm-6 col-12">
+          <div class="row">
+            <div class="col-6">
+              <select class="mdb-select" (change)="onSelectPerson($event)">
+                <option value="" disabled selected>Person</option>
+                <option value="1">1 Person</option>
+                <option value="2">2 Person</option>
+                <option value="3">3 Person</option>
+                <option value="4">4 Person</option>
+                <option value="5">5 Person</option>
+                <option value="6">6 Person</option>
+                <option value="7">7 Person</option>
+                <option value="8">8 Person</option>
+                <option value="9">9 Person</option>
+                <option value="10">10 Person</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <button class="btn" type="button" (click)="onBookTable()" [disabled]="bookTable.time === null || bookTable.date === null || bookTable.person === 0">
+                book table
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- col-6 -->
+
+      </div>
+      <!-- row -->
+    </section>
+    <!-- booking-wrapper -->
+  </div>
+  <!-- container -->
+
+
+  <br>
+  <br>
+  <br>
+  <section class="all-product">
+    <div class="container">
+      <div class="section-header">
+        <h2>Special Offer</h2>
+
+        <div class="bottom-border">
+          <span></span>
+          <img src="assets/img/icon/spoon.png">
+          <span></span>
+        </div>
+        <p class="sub-title">
+          There is specail offers Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+          et dolore magna aliqua. Ut enim ad minim veniam,
+        </p>
+      </div>
+      <br>
+      <!--Carousel Wrapper-->
+      <div class="carousel-wrapper multi-item">
+        <owl-carousel [options]="{items: 4, dots: false, nav: true, loop: true,responsive: {       '0': {  items: 1, margin: 5 },
+	                        '575': { items: 1,  margin: 5 },
+				'767': { items: 4, margin: 12 }
+	                   } }" [items]="responseArray" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+
+          <div class="item" *ngFor="let item of responseArray">
+            <div class="item-wrapper">
+              <div class="card" (click)="goToSingleProduct(item._id)">
+                <div class="view overlay hm-black-light">
+                  <img class="img-fluid" src="{{item.thumb}}" alt="image">
+                  <a (click)="goToSingleProduct(item._id)">
+                    <div class="mask"></div>
+                  </a>
+                  <button class="btn" (click)="goToSingleProduct(item._id)">View</button>
+                </div>
+                <div class="card-body text-center">
+                  <h6 class="title">{{item.title}}</h6>
+                  <!--Rating-->
+                  <div>
+                    <!--  *ngIf="item.noOfRating > 0 " -->
+                    <rating name="ratingReview" [(ngModel)]="item.rating" [max]="maxRat" [readonly]="isReadonly" [float]="true" stateOn="fa fa-star text-yellow"
+                      stateOff="fa fa-star-o">
+                    </rating>
+                    <span *ngIf="item.noOfRating > 0">({{item.noOfRating}})</span>
+                  </div>
+                  <p class="price"> {{currency}}{{item.price[0].value}}
+                    <span class="discount">{{currency}}{{item.price[0].specialPrice}}</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </owl-carousel>
+      </div>
+      <!--/.Carousel Wrapper-->
+    </div>
+    <!--  container -->
+  </section>
+  <!---offser-section-end -->
+
+  <!-- menu-section -->
+  <section class="menu-content">
+    <div class="container">
+      <div class="menu">
+        <div class="section-header">
+          <h2>Menu</h2>
+          <div class="bottom-border">
+            <span></span>
+            <img src="assets/img/icon/spoon.png">
+            <span></span>
+          </div>
+        </div>
+        <!--  section-header -->
+
+        <div class="row">
+          <div class="col-md-6" *ngFor="let item of recentCategoryData">
+            <!-- menu-item -->
+
+            <a (click)="gotoMenuItems(item._id)">
+              <div class="menu-item row card">
+                <!-- image col -->
+                <div class="col-3">
+                  <img src="{{item.thumb}}">
+                </div>
+                <!-- content col -->
+                <div class="col-9 pt-3">
+                  <div class="header">
+                    <div class="title">{{item.title}}</div>
+                    <!-- <div class="empty"></div> -->
+                    <!-- <div class="price">{{item.price}}</div> -->
+                  </div>
+                  <p class="details">{{item.description}}
+                  </p>
+                </div>
+                <!-- content-col -->
+              </div>
+              <!-- menu-item-end -->
+            </a>
+          </div>
+          <!-- col -->
+
+        </div>
+        <!-- row-end -->
+      </div>
+    </div>
+  </section>
+
+
+  <br>
+  <br>
+  <!-- services -->
+  <section class="services">
+    <div class="section-header">
+      <h2>We Provide</h2>
+
+      <div class="bottom-border">
+        <span></span>
+        <img src="assets/img/icon/spoon.png">
+        <span></span>
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+        <!-- col-content wrapper -->
+        <div class="col-md-4">
+          <div class="content-wrapper">
+            <img src="assets/img/icon/about-color.png" class="avatar-icon">
+            <h6>Flexible price</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequa
+            </p>
+          </div>
+        </div>
+        <!-- col-end -->
+        <!-- col-content wrapper -->
+        <div class="col-md-4">
+          <div class="content-wrapper">
+            <img src="assets/img/icon/spoon-color.png" class="avatar-icon">
+            <h6>Delicable food</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequa
+            </p>
+          </div>
+        </div>
+        <!-- col-end -->
+        <!-- col-content wrapper -->
+        <div class="col-md-4">
+          <div class="content-wrapper">
+            <img src="assets/img/icon/dish-color.png" class="avatar-icon">
+            <h6>Premimum services</h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequa
+            </p>
+          </div>
+        </div>
+        <!-- col-end -->
+
+      </div>
+      <!-- row -->
+
+    </div>
+  </section>
+  <!--  services section-end -->
+
+  <br>
+  <br>
+  <br>
+  <section class="about-us">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7 col-12">
+          <div class="section-header">
+            <h2>About Us</h2>
+
+            <div class="bottom-border">
+              <span></span>
+              <img src="assets/img/icon/about.png">
+              <span></span>
+            </div>
+
+          </div>
+
+          <p class="details">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+            occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+        </div>
+        <div class="col-md-5 col-12 hidden-sm-down">
+          <img src="assets/img/about.jpg" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- about-us-end -->
+  <br>
+  <br>
+  <section class="review text-center pb-3">
+    <div class="container">
+      <!--Carousel Wrapper-->
+      <div class="carousel-wrapper multi-item">
+        <owl-carousel [options]="{items: 3, dots: false, nav: true, loop: true,responsive: {       '0': {  items: 1, margin: 5 },
+	                         '575': { items: 1,  margin: 5 },
+	 			'767': { items: 3, margin: 12 }
+	                    } }" [items]="recentTestimonialData" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+
+          <div class="item" *ngFor="let item of recentTestimonialData">
+            <div class="item-wrapper">
+              <div class="testimonial">
+                <!--Avatar-->
+                <div class="avatar">
+                  <img src="{{item.image}}" class="rounded-circle  img-fluid">
+                </div>
+                <!--Review-->
+                <div class="rating">
+                  <i class="fa fa-star"> </i>
+                  <i class="fa fa-star"> </i>
+                  <i class="fa fa-star"> </i>
+                  <i class="fa fa-star"> </i>
+                  <i class="fa fa-star-o"> </i>
+                </div>
+
+                <!--Content-->
+
+                <p class="comment">{{item.message}}</p>
+
+                <h6>{{item.name}}</h6>
+                <p class="add grey-text">{{item.companyName}}</p>
+
+
+              </div>
+            </div>
+          </div>
+
+        </owl-carousel>
+      </div>
+      <!--/.Carousel Wrapper-->
+    </div>
+  </section>
+  <!-- review-end -->
+</div>

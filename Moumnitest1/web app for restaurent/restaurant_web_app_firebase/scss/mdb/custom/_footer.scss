@@ -1,0 +1,209 @@
+footer.page-footer{
+	background: $footer-bg;
+	padding-top: 0;
+	.newsletter{
+		background: $primary;
+		padding: 24px 0 40px;
+		form{
+			position: relative;
+			margin: 0 auto;
+		    width: 30rem;
+		    max-width: 100%;
+			.btn{
+				padding: 0;
+			    background: transparent;
+			    box-shadow: none;
+			    margin: 0;
+			    position: absolute;
+			    bottom: 15px;
+			    right: 0;
+			    img{height: 14px;}
+			}
+
+			.md-form{
+				margin: 0;
+	            .form-control{
+	                border-color:$white-a;
+	                border-radius: 0;
+	                margin:0;
+	                background: transparent;
+	                text-indent: 4px;
+	                color: $white-a;
+	                border-width: 2px;
+	                @include placeholder-color($white);
+	                &:focus{
+	                    box-shadow: none!important;
+	                    border-color: $white;
+	                }
+	            }
+			}
+		} //form
+	}//news letter
+
+	.wrapper{
+		padding-top: 4rem;
+	}
+	.about{
+		.logo-title{
+			margin-bottom: 1rem;
+			img{
+				width: 40px;
+				height: 40px;
+			}
+			span{
+				font-weight: 600;
+				color: $white-b;
+				margin-left: 12px;
+    			font-size: 17px;
+    			letter-spacing: 1px;
+    			text-transform: uppercase;
+			}
+		} //logo-title
+		p{
+			font-size: 12px;
+			color: $white-d;
+			text-align: justify;
+		}
+		.social-link{
+			a{
+				border: 1px solid $white-d;
+				color: $white-d;
+				height: 29px;
+			    width: 29px;
+			    display: inline-block;
+			    font-size: 16px;
+			    line-height: 29px;
+			    text-align: center;
+			    border-radius: 2px;
+					transition: all .3s ease;
+			    &:not(:last-child){
+			    	margin-right: 10px;
+			    }
+			    &:hover,:active,:focus,:active{
+			    	border-color: $primary;
+			    	color: $primary;
+			    }
+			}
+		}
+	}//about
+	.recent-post{
+		img{
+			width: 98%;
+			display: block;
+			margin: 0 auto;
+			height: 60px;
+			cursor: pointer;
+		}
+		p{
+			font-size: 12px;
+			text-align: justify;
+			margin-bottom: 0;
+			color: $white-c;
+			cursor: pointer;
+		}
+		span{
+			font-size: 10px;
+			font-weight: 500;
+			color: $white-d;
+		}
+		.btn-flat{
+			padding: 10px 2px;
+			margin: 0;
+			text-transform: capitalize;
+			opacity: .8;
+			&:hover,:focus{
+				opacity: 1;
+			}
+		}
+	}
+	.social-images{
+		display: flex;
+		flex-wrap:wrap;
+		img{
+			width: 66px;
+			height: 64px;
+			margin:4px;
+		}
+	}
+	.title{
+	    font-size: 15px;
+	    font-weight: 600;
+	    letter-spacing: 1px;
+	    margin: 12px 0 2rem;
+	    color: $white-c;
+	    position: relative;
+	    &:after{
+	    	content: "";
+		    position: absolute;
+		    bottom: -10px;
+		    left: 0;
+		    width: 42px;
+		    height: 1px;
+		    background-color: $primary;
+	    }
+	} //title
+	// md-form style
+	.contact-form{
+		position: relative;
+	.md-form{
+		margin: 0;
+            .form-control,.md-textarea{
+                border: 1px solid $black-c;
+                border-radius: 0;
+                text-indent: 10px;
+                margin: 4px 0 0;
+                height: 1.6rem;
+                background: transparent;
+                color: $white-c;
+                &:focus{
+                    box-shadow: none!important;
+                    border-color: $primary;
+                }
+            }
+            .textarea.md-textarea{
+            	min-height: 1.6rem;
+            }
+        }
+        .btn{
+			position: absolute;
+		    right: 0;
+		    background: $primary;
+		    margin: 0;
+		    bottom: 0;
+		    height: 26px;
+		    padding: 2px 16px;
+		    text-transform: capitalize;
+        }
+	}//-form-end
+
+	.footer-row{
+			color: $white-d;
+			a{color: $white-d;}
+			.copyright{
+				a,span{
+					font-size: 13px;
+				}
+			}
+			.list-inline{
+				a{
+					font-size: 10px;
+					color: $white-d;
+					font-weight: 500;
+					text-transform: uppercase;
+					padding: 0 10px;
+					border-left: 1px solid $black-c;
+				}
+			}
+	} //footer row end
+	@media only screen and(max-width: 576px) {
+		.recent-post{
+			text-align: left;
+		}
+		.title{
+			margin-top: 2rem;
+			&:after{
+				left: 44%;
+			}
+		}
+	}
+}

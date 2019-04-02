@@ -1,0 +1,285 @@
+
+.home-content {
+  min-height: 20rem;
+    .banner {
+      height: 38rem;
+      width: 100%;
+      position: relative;
+      margin-top: -63px;
+      .bg-img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .overlay-bg {
+        @extend .bg-img;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .overlay-content {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        top: 40%;
+        color: $white;
+        text-transform: uppercase;
+        padding: 0 2rem;
+        h5 {
+          letter-spacing: 1px;
+          font-weight: 400;
+          color: $white-a;
+          line-height: 1.7rem;
+        }
+        h1 {
+          font-weight: 900;
+          font-size: 52px;
+
+          letter-spacing: 1px;
+        }
+        .btn {
+          background: rgba(0, 0, 0, 0.2);
+          border: 1px solid $white;
+          margin: 1rem;
+        }
+      }
+      //overlay-content
+
+      @media only screen and (max-width: 575px) {
+        height: 30rem !important;
+        .overlay-content {
+          top: 26% !important;
+          h5 {
+            font-size: 20px !important;
+          }
+          h1 {
+            font-size: 46px !important;
+          }
+        }
+
+      }
+    }
+    //banner\
+
+  //booking wrapper
+  .booking-wrapper {
+    margin-top: -3rem;
+    padding: 2.5rem 1.2rem 1.4rem;
+    border-radius: 2px;
+    background: $primary;
+    .col-select {
+      position: relative;
+      cursor: pointer;
+      i {
+        position: absolute;
+        top: 17%;
+        right: 1.45rem;
+        color: $white;
+      }
+      .form-control {
+        border: 1px solid $white;
+        border-radius: 3px;
+        height: 1.13rem;
+        width: 100%;
+        font-size: 14px;
+        border-radius: 0;
+        text-indent: 6px;
+        margin: 0;
+        color: $white-a;
+        @include placeholder-color($white-a)
+        &:focus {
+          box-shadow: none;
+          border: 0;
+        }
+      }
+    }
+    .col-select.date {
+      z-index: 1;
+    }
+    .md-form {
+      position: relative;
+      margin: 0;
+      border: 1px solid $white-a;
+      border-radius: 3px;
+      height: 2.4rem;
+      padding-left: 8px;
+      margin-bottom: 1rem;
+      input {
+        margin: 0 !important;
+        height: 1.4rem !important;
+        border: 0 !important;
+        font-size: 14px !important;
+        color: $white;
+        @include placeholder-color($white);
+        &:focus {
+          box-shadow: none !important;
+        }
+      }
+    }
+    .mdb-select {
+      border: 1px solid $white;
+      height: 2.4rem;
+      width: 100%;
+      font-size: 14px;
+      padding: 0 5px;
+      background: transparent;
+      color: $white;
+      text-transform: capitalize;
+      option {
+        color: $black-a !important;
+        max-height: 2rem;
+      }
+    }
+    .btn {
+      margin: 0;
+      box-shadow: none;
+      width: 100%;
+      font-size: 14px;
+      height: 2.4rem;
+      line-height: 13px;
+      color: $black-b !important;
+      border: 1px solid $white !important;
+      border-radius: 3px;
+      background: $white !important;
+      padding: 0 !important;
+    }
+  }
+  //booking wrapper
+
+  // carousel style
+  .carousel-wrapper{
+		position: relative;
+		.owl-carousel.owl-loaded{
+			margin: 0;
+		}
+		&.multi-item{
+			.item-wrapper {
+				margin: 0 10px;
+			}
+			.owl-carousel .owl-nav{
+				display: block!important;
+				.owl-prev{
+					color: transparent;
+					background-color: transparent;
+					margin: 0;
+					position: absolute;
+					top: 30%;
+					left: -60px;
+					&:after{
+						content: "\2039";
+						font-size: 38px;
+						color: $black-c;
+					}
+				}
+				.owl-next{
+					color: transparent;
+					background-color: transparent;
+					margin: 0;
+					position: absolute;
+					top: 30%;
+					right: -34px;
+					&:after{
+						content: "\203A";
+						font-size: 38px;
+						color: $black-c;
+					}
+				}
+				@media only screen and (max-width: 575px) {
+					display: none!important;
+				}
+			}
+
+		}
+	} //carousel wrapper
+
+  .services {
+    .content-wrapper {
+      border: 1px solid $white-c;
+      border-radius: 4px;
+      padding: 0px 24px 10px;
+      height: 16rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      .avatar-icon {
+        display: block;
+        margin: -2rem auto 1rem;
+        background: #fff;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        padding: 18px;
+        outline: 8px solid $white;
+        border: 1px solid $white-c;
+      }
+      h6 {
+        font-weight: 600;
+        color: $black-a;
+        text-transform: uppercase;
+      }
+      p {
+        text-align: justify;
+        font-size: 14px;
+        margin-top: 10px;
+        height: 10.7rem;
+        overflow: hidden;
+        color: $black-c;
+      }
+    }
+  }
+
+  .about-us {
+    background: $white-a;
+    padding: 3rem 0;
+    margin: 10px;
+    .details {
+      text-align: justify;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+
+    }
+  }
+  //about-us-end
+  .review {
+    margin-top: 3rem;
+    .testimonial {
+      border: 1px solid $white-b;
+      border-radius: 4px;
+      padding: 0px 24px 10px;
+      height: 24rem;
+      margin-top: 3rem;
+      .avatar {
+        margin: -3rem auto 1rem;
+        img {
+          width: 80px;
+          height: 80px;
+        }
+      }
+      .comment {
+        text-align: justify;
+        font-size: 14px;
+        margin-top: 8px;
+        height: 13rem;
+        overflow: hidden;
+      }
+      h6 {
+        font-weight: 500;
+        text-transform: uppercase;
+        color: $primary;
+      }
+      .add {
+        font-size: 15px;
+        text-align: center;
+      }
+      .rating {
+        color: $primary;
+      }
+    }
+  }
+  //review-end
+}

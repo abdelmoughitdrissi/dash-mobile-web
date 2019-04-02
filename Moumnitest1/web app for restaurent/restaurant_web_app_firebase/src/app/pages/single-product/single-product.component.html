@@ -1,0 +1,213 @@
+<div class="breadcrumb-wrap">
+  <img src="assets/img/breadcrumbbg.jpg" class="bg-img">
+  <div class="overlay-bg"></div>
+
+  <div class="overlay-content">
+    <h1>{{menuItemData.title}}</h1>
+    <h6>Find new taste each time.</h6>
+  </div>
+</div>
+
+
+<section class="single-product">
+  <!--loader -->
+  <div class="preloader-wrap waiting" *ngIf="loading === 0 ">
+    <div class="loader waiting">
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+      <span class="loader-item"></span>
+    </div>
+  </div>
+  <!-- loader -->
+  <!-- no data found -->
+  <div class="empty-message" *ngIf="loading === 2 ">
+    <i class="fa fa-5x fa-frown-o" aria-hidden="true"></i>
+    <h5>
+      <br>Sorry
+      <br>
+      <br> Food Item is not available in this menu. </h5>
+  </div>
+  <!-- No data found end -->
+  <!-- container -->
+  <div class="container" *ngIf="loading === 1 ">
+    <div class="row ">
+      <!--  col-for-sliding-images -->
+      <div class="col-md-6">
+        <div class="slider-wrapper mb-3">
+
+          <img src="{{menuItemData.thumb}}" class="product-img">
+
+        </div>
+        <!--/ slider-wrapper -->
+      </div>
+      <!--/ col-slider-end -->
+
+      <!--  col-for-product description -->
+      <div class="col-md-6 details">
+        <h3 class="title">{{menuItemData.title}}</h3>
+        <div *ngIf="menuItemData.noOfRating > 0 ">
+          <rating name="ratingReview" [(ngModel)]="menuItemData.rating" [max]="maxRat" [readonly]="isReadonly" [float]="true"
+            stateOn="fa fa-star text-yellow" stateOff="fa fa-star-o">
+          </rating>
+          <span>({{menuItemData.noOfRating}})</span>
+        </div>
+        <h5 class="price">
+          <del *ngIf="variantArray[0].value != variantArray[0].specialPrice ">{{currency}}{{variantArray[0].value}}</del>{{currency}}
+          {{itemPrice | number}}</h5>
+        <div class="wrapper">
+          <!--  <p>{{menuItemData.description}}</p> -->
+          <div class="row">
+            <div class="col-md-7 form-group">
+              <select class="form-control" id="size" #f (change)="onSelectSize($event)">
+                <!-- <option disabled selected>Size</option> -->
+                <option value="{{size.value}}" *ngFor="let size of variantArray;let i= index">{{size.pname}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+              <div class="form-check" *ngFor="let data of extraIngredients;let i=index">
+                <input class="form-check-input" type="checkbox" checked="data.selected" name="{{data.name}}" id="{{data.name}}"
+                  [(ngModel)]="data.selected" (change)="selectExtraIngredient(data,$event)">
+                <label class="form-check-label" for="{{data.name}}">
+                  {{data.name}} -{{currency}}{{data.value}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="row">
+            <div class="col-md-7 form-group">
+              <select class="form-control" id="qty" #q (change)="onSelectQty(q.value)">
+                <option disabled selected>Qty:</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <h5 class="price total-price">{{currency}}{{totalPrice|number}}</h5>
+          </div>
+          <div class="row">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-8">
+                  <button class="btn btn-cart" (click)="addToCart()">add to cart</button>
+                </div>
+                <div class="col-4" *ngIf="!isFavourite">
+                  <button class="btn btn-warning btn-wishlist" data-placement="top" title="Add to favourit" (click)="onAddToFavourit(menuItemData.thumb)">
+                    <i class="fa fa-heart-o animated fadeIn"></i>
+
+                  </button>
+                </div>
+
+                <div class="col-4" *ngIf="isFavourite">
+                  <button class="btn btn-warning btn-wishlist" data-placement="top" title="Add to favourit" (click)="removeFavourit()">
+                    <i class="fa fa-heart animated fadeIn"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="stock">In stock :
+            <span>SKU:113404</span>
+          </p>
+        </div>
+        <!--  wrapper -->
+        <div class="social-link">
+          <a shareButton="facebook">
+            <i class="fa fa-facebook-official"></i>
+          </a>
+          <a shareButton="twitter">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a shareButton="google">
+            <i class="fa fa-google"></i>
+          </a>
+          <a shareButton="linkedin">
+            <i class="fa fa-linkedin-square"></i>
+          </a>
+          <a shareButton="whatsapp">
+            <i class="fa fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- row end -->
+    <div class="tab-wrapper">
+      <!-- Nav tabs -->
+      <mdb-tabset #staticTabs [buttonClass]="'nav-tabs tabs-4 pills-secondary white margin'" [contentClass]="''">
+        <!--Panel 1-->
+        <mdb-tab heading="Description">
+          <div class="row Description">
+            <div class="col-12" [innerHTML]="menuItemData.description">
+              <br> {{menuItemData.description}}
+
+            </div>
+          </div>
+        </mdb-tab>
+        <!--Panel 2-->
+        <mdb-tab heading="Additional info">
+          <div class="row Description">
+            <div class="col-12">
+              <br> {{menuItemData.description}}
+              <!--  <p>additional Information Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p> -->
+            </div>
+          </div>
+        </mdb-tab>
+        <!--Panel 3-->
+        <mdb-tab heading="Review" *ngIf="allReviewsData.length>0">
+          <div class="review">
+            <div class="review-list">
+              <div class="row review-list-item" *ngFor="let item of allReviewsData">
+                <!-- col-img -->
+                <div class="col-md-2">
+                  <!-- <img src="{{item.user.imageUrl}}"> -->
+                </div>
+                <div class="col-md-10">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <!-- <h6>{{item.user.name}}</h6> -->
+                      <!-- <span class="date">{{item.createdAt|date}}</span> -->
+                    </div>
+                    <div class="col-md-4 ">
+                      <rating name="ratingReview" ngModel="{{item.item.review?.rating ? item.item.review.rating : null}}"
+                        [max]="maxRat" [readonly]="isReadonly" [float]="true" stateOn="fa fa-star text-yellow" stateOff="fa fa-star-o">
+                      </rating>
+                    </div>
+                  </div>
+                  <p>{{item.item.review?.comment ? item.item.review.comment : null}}</p>
+                </div>
+              </div>
+              <!--/ review-list-item -->
+            </div>
+
+          </div>
+          <!--/review -->
+        </mdb-tab>
+      </mdb-tabset>
+    </div>
+    <!-- tab-wrapper -->
+
+
+  </div>
+  <!-- container-end -->
+</section>
+<!---single-section-end -->
